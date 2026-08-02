@@ -1,0 +1,105 @@
+national_scope:
+  name: Nacional
+  aliases:
+    - proceso electoral federal
+    - elecciones federales
+    - elección federal
+    - elecciones 2027
+
+states:
+  - name: Aguascalientes
+    aliases: [estado de aguascalientes]
+    municipalities: [Aguascalientes, Jesús María]
+  - name: Baja California
+    aliases: [estado de baja california]
+    municipalities: [Mexicali, Tijuana, Ensenada]
+  - name: Baja California Sur
+    aliases: [estado de baja california sur, bcs]
+    municipalities: [La Paz, Los Cabos]
+  - name: Campeche
+    aliases: [estado de campeche]
+    municipalities: [Campeche, Carmen]
+  - name: Chiapas
+    aliases: [estado de chiapas]
+    municipalities: [Tuxtla Gutiérrez, Tapachula]
+  - name: Chihuahua
+    aliases: [estado de chihuahua, chih]
+    municipalities: [Chihuahua, Ciudad Juárez, Juárez]
+  - name: Ciudad de México
+    aliases: [cdmx, ciudad de mexico]
+    municipalities: [Iztapalapa, Coyoacán, Gustavo A. Madero]
+  - name: Coahuila
+    aliases: [coahuila de zaragoza]
+    municipalities: [Saltillo, Torreón]
+  - name: Colima
+    aliases: [estado de colima]
+    municipalities: [Colima, Manzanillo]
+  - name: Durango
+    aliases: [estado de durango]
+    municipalities: [Durango, Gómez Palacio]
+  - name: Estado de México
+    aliases: [edomex, estado de mexico]
+    municipalities: [Toluca, Ecatepec, Naucalpan]
+  - name: Guanajuato
+    aliases: [estado de guanajuato]
+    municipalities: [León, Irapuato, Celaya]
+  - name: Guerrero
+    aliases: [estado de guerrero]
+    municipalities: [Chilpancingo, Acapulco]
+  - name: Hidalgo
+    aliases: [estado de hidalgo]
+    municipalities: [Pachuca, Tulancingo]
+  - name: Jalisco
+    aliases: [estado de jalisco]
+    municipalities: [Guadalajara, Zapopan, Puerto Vallarta]
+  - name: Michoacán
+    aliases: [michoacan, michoacán de ocampo]
+    municipalities: [Morelia, Uruapan, Zamora]
+  - name: Morelos
+    aliases: [estado de morelos]
+    municipalities: [Cuernavaca, Jiutepec]
+  - name: Nayarit
+    aliases: [estado de nayarit]
+    municipalities: [Tepic, Bahía de Banderas]
+  - name: Nuevo León
+    aliases: [nuevo leon, nl]
+    municipalities: [Monterrey, Guadalupe, San Pedro Garza García]
+  - name: Oaxaca
+    aliases: [estado de oaxaca]
+    municipalities: [Oaxaca de Juárez, Juchitán]
+  - name: Puebla
+    aliases: [estado de puebla]
+    municipalities: [Puebla, Tehuacán]
+  - name: Querétaro
+    aliases: [queretaro, estado de querétaro]
+    municipalities: [Querétaro, San Juan del Río]
+  - name: Quintana Roo
+    aliases: [qroo, estado de quintana roo]
+    municipalities: [Cancún, Chetumal, Playa del Carmen]
+  - name: San Luis Potosí
+    aliases: [san luis potosi, slp]
+    municipalities: [San Luis Potosí, Soledad de Graciano Sánchez]
+  - name: Sinaloa
+    aliases: [estado de sinaloa]
+    municipalities: [Culiacán, Mazatlán, Ahome]
+  - name: Sonora
+    aliases: [estado de sonora]
+    municipalities: [Hermosillo, Cajeme, Nogales]
+  - name: Tabasco
+    aliases: [estado de tabasco]
+    municipalities: [Centro, Villahermosa, Cárdenas]
+  - name: Tamaulipas
+    aliases: [estado de tamaulipas]
+    municipalities: [Ciudad Victoria, Reynosa, Matamoros]
+  - name: Tlaxcala
+    aliases: [estado de tlaxcala]
+    municipalities: [Tlaxcala, Apizaco]
+  - name: Veracruz
+    aliases: [veracruz de ignacio de la llave]
+    municipalities: [Xalapa, Veracruz, Coatzacoalcos]
+  - name: Yucatán
+    aliases: [yucatan, estado de yucatán]
+    municipalities: [Mérida, Valladolid]
+  - name: Zacatecas
+    aliases: [estado de zacatecas]
+    municipalities: [Zacatecas, Fresnillo]

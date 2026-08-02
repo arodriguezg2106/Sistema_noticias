@@ -1,0 +1,21 @@
+parties:
+  - name: PAN
+    aliases: [Partido Acción Nacional, panista, panistas]
+  - name: PRI
+    aliases: [Partido Revolucionario Institucional, priista, priistas]
+  - name: PRD
+    aliases: [Partido de la Revolución Democrática, perredista, perredistas]
+  - name: Morena
+    aliases: [Movimiento Regeneración Nacional, morenista, morenistas]
+  - name: Movimiento Ciudadano
+    aliases: [MC, movimiento naranja]
+  - name: Partido Verde
+    aliases: [PVEM, Partido Verde Ecologista de México]
+  - name: Partido del Trabajo
+    aliases: [PT, petista, petistas]
+coalitions:
+  - name: Sigamos Haciendo Historia
+    parties: [Morena, Partido Verde, Partido del Trabajo]
+  - name: Fuerza y Corazón por México
+    parties: [PAN, PRI, PRD]
+

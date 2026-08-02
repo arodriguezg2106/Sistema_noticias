@@ -1,0 +1,56 @@
+settings:
+  user_agent: SMEE/0.3 (descubrimiento respetuoso de fuentes públicas)
+  timeout_seconds: 15
+  max_feed_bytes: 2000000
+  delay_between_sources_seconds: 1
+  max_candidates_per_source: 7
+
+sources:
+  # Nacionales. Son semillas para verificación, no aprobación editorial automática.
+  - {name: El Universal, base_url: https://www.eluniversal.com.mx, states: [], priority: high}
+  - {name: Milenio, base_url: https://www.milenio.com, states: [], priority: high}
+  - {name: Excélsior, base_url: https://www.excelsior.com.mx, states: [], priority: high}
+  - {name: La Jornada, base_url: https://www.jornada.com.mx, states: [], priority: high}
+  - {name: Proceso, base_url: https://www.proceso.com.mx, states: [], priority: high}
+  - {name: Animal Político, base_url: https://animalpolitico.com, states: [], priority: high}
+  - {name: El Financiero, base_url: https://www.elfinanciero.com.mx, states: [], priority: high}
+  - {name: El Economista, base_url: https://www.eleconomista.com.mx, states: [], priority: high}
+  - {name: El Congresista, base_url: https://elcongresista.mx, states: [], priority: medium}
+  - {name: Aristegui Noticias, base_url: https://aristeguinoticias.com, states: [], priority: high}
+
+  # Semillas estatales. Todas deben pasar por discovery antes de incorporarse a live.
+  - {name: El Heraldo de Aguascalientes, base_url: https://www.heraldo.mx, states: [Aguascalientes]}
+  - {name: El Mexicano, base_url: https://www.el-mexicano.com.mx, states: [Baja California]}
+  - {name: El Sudcaliforniano, base_url: https://www.elsudcaliforniano.com.mx, states: [Baja California Sur]}
+  - {name: Tribuna Campeche, base_url: https://tribunacampeche.com, states: [Campeche]}
+  - {name: Cuarto Poder, base_url: https://www.cuartopoder.mx, states: [Chiapas]}
+  - {name: El Diario de Chihuahua, base_url: https://www.eldiariodechihuahua.mx, states: [Chihuahua]}
+  - {name: El Norte, base_url: https://www.elnorte.com, states: [Nuevo León], priority: high}
+  - {name: ABC Noticias, base_url: https://abcnoticias.mx, states: [Nuevo León], priority: high}
+  - {name: El Universal CDMX, base_url: https://www.eluniversal.com.mx, states: [Ciudad de México], priority: high}
+  - {name: Vanguardia, base_url: https://vanguardia.com.mx, states: [Coahuila], priority: high}
+  - {name: El Siglo de Torreón, base_url: https://www.elsiglodetorreon.com.mx, states: [Coahuila]}
+  - {name: Diario de Colima, base_url: https://diariodecolima.com, states: [Colima]}
+  - {name: El Siglo de Durango, base_url: https://www.elsiglodedurango.com.mx, states: [Durango]}
+  - {name: El Sol de Toluca, base_url: https://www.elsoldetoluca.com.mx, states: [Estado de México]}
+  - {name: AM, base_url: https://www.am.com.mx, states: [Guanajuato]}
+  - {name: El Sur de Acapulco, base_url: https://suracapulco.mx, states: [Guerrero]}
+  - {name: Criterio Hidalgo, base_url: https://criteriohidalgo.com, states: [Hidalgo]}
+  - {name: El Informador, base_url: https://www.informador.mx, states: [Jalisco], priority: high}
+  - {name: La Voz de Michoacán, base_url: https://www.lavozdemichoacan.com.mx, states: [Michoacán]}
+  - {name: Diario de Morelos, base_url: https://www.diariodemorelos.com, states: [Morelos]}
+  - {name: Meridiano, base_url: https://meridiano.mx, states: [Nayarit]}
+  - {name: Noticias Voz e Imagen de Oaxaca, base_url: https://www.nvinoticias.com, states: [Oaxaca]}
+  - {name: El Sol de Puebla, base_url: https://www.elsoldepuebla.com.mx, states: [Puebla]}
+  - {name: AD Querétaro, base_url: https://aldialogo.mx, states: [Querétaro]}
+  - {name: Novedades de Quintana Roo, base_url: https://sipse.com, states: [Quintana Roo]}
+  - {name: Pulso de San Luis, base_url: https://pulsoslp.com.mx, states: [San Luis Potosí]}
+  - {name: Noroeste, base_url: https://www.noroeste.com.mx, states: [Sinaloa], priority: high}
+  - {name: El Debate, base_url: https://www.debate.com.mx, states: [Sinaloa]}
+  - {name: Expreso, base_url: https://www.expreso.com.mx, states: [Sonora]}
+  - {name: Tabasco Hoy, base_url: https://www.tabascohoy.com, states: [Tabasco]}
+  - {name: El Mañana de Reynosa, base_url: https://www.elmanana.com, states: [Tamaulipas]}
+  - {name: El Sol de Tlaxcala, base_url: https://www.elsoldetlaxcala.com.mx, states: [Tlaxcala]}
+  - {name: Diario de Xalapa, base_url: https://www.diariodexalapa.com.mx, states: [Veracruz]}
+  - {name: Diario de Yucatán, base_url: https://www.yucatan.com.mx, states: [Yucatán], priority: high}
+  - {name: Imagen de Zacatecas, base_url: https://imagenzac.com.mx, states: [Zacatecas]}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SMEE — Cobertura de fuentes</title>
+  <style>
+    :root { --ink:#172033; --muted:#687386; --paper:#f5f7fb; --card:#fff;
+      --accent:#185adb; --ok:#147a45; --warn:#a95b08; --line:#dfe5ef; }
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 system-ui,sans-serif}
+    header{padding:30px max(5vw,24px);background:#102047;color:white} header h1{margin:0} main{max-width:1250px;margin:auto;padding:25px}
+    .metrics{display:flex;gap:12px;flex-wrap:wrap}.metric,.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:15px}
+    .metric b{font-size:26px;color:var(--accent);display:block} table{width:100%;border-collapse:collapse;background:white;border-radius:9px;overflow:hidden}
+    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eaf0fb}code{font-size:12px;white-space:normal}
+    .ok{color:var(--ok);font-weight:700}.warn{color:var(--warn);font-weight:700}.endpoint{display:block;margin:3px 0}h2{margin-top:30px}
+  </style>
+</head>
+<body><header><h1>SMEE · Mapa de fuentes</h1><div>Generado {{ generated_at.strftime('%d/%m/%Y %H:%M') }}</div></header>
+<main>
+  <div class="metrics">
+    <div class="metric"><b>{{ seeds|length }}</b>fuentes semilla</div>
+    <div class="metric"><b>{{ results|length }}</b>inspeccionadas</div>
+    <div class="metric"><b>{{ active_count }}</b>con XML verificado</div>
+  </div>
+  <h2>Matriz estatal</h2>
+  <table><thead><tr><th>Entidad</th><th>Mapeadas</th><th>Verificadas en esta corrida</th><th>Auditoría booleana manual</th></tr></thead><tbody>
+    {% for row in coverage %}<tr><td>{{ row.state }}</td><td class="{{ 'warn' if row.gap else 'ok' }}">{{ row.mapped }}</td><td>{{ row.verified }}</td><td><code>{{ row.query }}</code></td></tr>{% endfor %}
+  </tbody></table>
+  <h2>Resultados de descubrimiento</h2>
+  {% for result in results %}<article class="card">
+    <strong>{{ result.name }}</strong> · <span class="{{ 'ok' if result.status == 'active' else 'warn' }}">{{ result.status }}</span><br>
+    <a href="{{ result.base_url }}">{{ result.base_url }}</a> · {{ result.states|join(', ') if result.states else 'Nacional' }}
+    {% for endpoint in result.endpoints %}<span class="endpoint">{{ endpoint.endpoint_type }}: <a href="{{ endpoint.url }}">{{ endpoint.url }}</a> ({{ endpoint.source }})</span>{% endfor %}
+    {% if result.errors %}<details><summary>{{ result.errors|length }} incidencias de validación</summary><ul>{% for error in result.errors %}<li>{{ error }}</li>{% endfor %}</ul></details>{% endif %}
+  </article>{% else %}<p>No se inspeccionaron fuentes.</p>{% endfor %}
+</main></body></html>
+

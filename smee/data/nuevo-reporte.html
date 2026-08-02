@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SMEE — Reporte ejecutivo</title>
+  <style>
+    :root { --ink:#172033; --muted:#687386; --paper:#f5f7fb; --card:#fff;
+      --accent:#185adb; --critical:#a61b1b; --high:#c35b08; --line:#dfe5ef; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:15px/1.55 system-ui,sans-serif; }
+    header { padding:34px max(5vw,24px); color:white; background:linear-gradient(120deg,#102047,#185adb); }
+    header h1 { margin:0 0 4px; font-size:clamp(25px,4vw,40px); }
+    header p { margin:0; opacity:.82; }
+    main { max-width:1200px; margin:auto; padding:28px max(3vw,18px) 60px; }
+    h2 { margin:34px 0 14px; font-size:21px; }
+    h3 { margin:0; font-size:17px; }
+    .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+    .metric,.card,.empty { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+    .metric b { display:block; font-size:30px; color:var(--accent); }
+    .metric span,.meta { color:var(--muted); font-size:13px; }
+    .activity { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { border-radius:999px; padding:5px 10px; background:#e8eefc; color:#173d89; }
+    .card { margin:10px 0; border-left:5px solid #7891bd; }
+    .card.Crítico { border-left-color:var(--critical); }
+    .card.Alto { border-left-color:var(--high); }
+    .title-row { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .score { white-space:nowrap; font-weight:700; }
+    .reasons { margin:9px 0; color:#39465d; }
+    details { margin-top:10px; }
+    a { color:#1554c0; }
+    .review { border-left-color:#7b3fb2; }
+    .notice { margin-bottom:18px; padding:13px 16px; border:1px solid #e0bd57; border-radius:9px; background:#fff8dd; color:#654d00; }
+    .mock-source { color:var(--muted); }
+    footer { text-align:center; color:var(--muted); padding:28px; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>SMEE</h1>
+  <p>Monitoreo de Eventos Estratégicos · Generado 31/07/2026 21:03 Hora estándar central (México)</p>
+</header>
+<main>
+  <div class="notice"><strong>Datos de demostración.</strong> Las fuentes simuladas no tienen enlace externo y no representan publicaciones reales.</div>
+  <section class="metrics">
+    <div class="metric"><b>4</b><span>eventos nuevos</span></div>
+    <div class="metric"><b>1</b><span>eventos actualizados</span></div>
+    <div class="metric"><b>1</b><span>duplicados retenidos</span></div>
+    <div class="metric"><b>3</b><span>elementos para revisión</span></div>
+  </section>
+
+  <h2>Entidades con mayor actividad</h2>
+  <div class="activity">
+    <span class="tag">Chihuahua · 2</span><span class="tag">Puebla · 1</span><span class="tag">Jalisco · 1</span>
+  </div>
+
+  <h2>Prioridad crítica y alta</h2>
+  
+    <article class="card Alto">
+      <div class="title-row"><h3>Tribunal Electoral emite resolución sobre impugnación en Puebla</h3><span class="score">Alto · 14</span></div>
+      <div class="meta">Puebla · Resolución electoral · SMEE-20260730-AAEC60FB</div>
+      <p>El Tribunal Electoral emitió sentencia y resolución electoral respecto de una impugnación presentada en Puebla.</p>
+      <div class="reasons">Tipo 'Resolución electoral': +9 · Fuente oficial: +5</div>
+    </article>
+  
+    <article class="card Alto">
+      <div class="title-row"><h3>Ana Torres presentó su renuncia a la dirigencia estatal en Jalisco</h3><span class="score">Alto · 13</span></div>
+      <div class="meta">Jalisco · Renuncia o declinación · SMEE-20260730-12D2D0E1</div>
+      <p>Ana Torres, de Movimiento Ciudadano, presentó su renuncia y dejó el cargo en Guadalajara, Jalisco.</p>
+      <div class="reasons">Tipo 'Renuncia o declinación': +9 · Actor prioritario: +4</div>
+    </article>
+  
+
+  <h2>Eventos por entidad federativa</h2>
+  
+    <h3>Chihuahua</h3>
+    
+      <article class="card Medio">
+        <div class="title-row"><h3>Nueva encuesta coloca a María López al frente en Chihuahua</h3><span class="score">Medio · 7</span></div>
+        <div class="meta">Nueva encuesta · Chihuahua · Estado del evento: updated</div>
+        <p>La encuesta de intención de voto para la gubernatura de Chihuahua ubica a María López del PAN en primer lugar y a Juan Pérez de Morena en segundo.</p>
+        <div><strong>Actores:</strong> Juan Pérez, María López</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Nueva encuesta': +8 · Actor prioritario: +4 · Publicación duplicada vinculada: -5</div>
+        <details><summary>Fuentes asociadas (3)</summary>
+          <ul><li><span class="mock-source">Encuestadora Horizonte — Nueva encuesta coloca a María López al frente en Chihuahua (fuente simulada; sin enlace externo)</span> (principal)</li><li><span class="mock-source">Diario del Norte — Encuesta perfila a María López para la gubernatura de Chihuahua (fuente simulada; sin enlace externo)</span></li><li><span class="mock-source">Diario del Norte — Encuesta perfila a María López para la gubernatura de Chihuahua (fuente simulada; sin enlace externo)</span> (duplicado retenido)</li></ul>
+        </details>
+      </article>
+    
+      <article class="card Descartable">
+        <div class="title-row"><h3>Partidos preparan elecciones locales</h3><span class="score">Descartable · -1</span></div>
+        <div class="meta">Otro evento electoral · Chihuahua · Estado del evento: detected</div>
+        <p>La columna revisa los preparativos para las elecciones y gubernaturas en Chihuahua y Jalisco.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3 · Columna de opinión: -4</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><span class="mock-source">Panorama Nacional — Partidos preparan elecciones locales (fuente simulada; sin enlace externo)</span> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Jalisco</h3>
+    
+      <article class="card Alto">
+        <div class="title-row"><h3>Ana Torres presentó su renuncia a la dirigencia estatal en Jalisco</h3><span class="score">Alto · 13</span></div>
+        <div class="meta">Renuncia o declinación · Guadalajara · Estado del evento: detected</div>
+        <p>Ana Torres, de Movimiento Ciudadano, presentó su renuncia y dejó el cargo en Guadalajara, Jalisco.</p>
+        <div><strong>Actores:</strong> Ana Torres</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Renuncia o declinación': +9 · Actor prioritario: +4</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><span class="mock-source">Noticias de Occidente — Ana Torres presentó su renuncia a la dirigencia estatal en Jalisco (fuente simulada; sin enlace externo)</span> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Puebla</h3>
+    
+      <article class="card Alto">
+        <div class="title-row"><h3>Tribunal Electoral emite resolución sobre impugnación en Puebla</h3><span class="score">Alto · 14</span></div>
+        <div class="meta">Resolución electoral · Puebla · Estado del evento: detected</div>
+        <p>El Tribunal Electoral emitió sentencia y resolución electoral respecto de una impugnación presentada en Puebla.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Resolución electoral': +9 · Fuente oficial: +5</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><span class="mock-source">Tribunal Electoral — Tribunal Electoral emite resolución sobre impugnación en Puebla (fuente simulada; sin enlace externo)</span> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+
+  <h2>Revisión manual</h2>
+  
+    <article class="card review">
+      <h3>Partidos preparan elecciones locales <span class="mock-source">(fuente simulada)</span></h3>
+      <div class="meta">Panorama Nacional · Chihuahua · Otro evento electoral</div>
+      <div>Se detectaron varias entidades con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3>Encuesta perfila a María López para la gubernatura de Chihuahua <span class="mock-source">(fuente simulada)</span></h3>
+      <div class="meta">Diario del Norte · Chihuahua · Nueva encuesta</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3>Nueva encuesta coloca a María López al frente en Chihuahua <span class="mock-source">(fuente simulada)</span></h3>
+      <div class="meta">Encuestadora Horizonte · Chihuahua · Nueva encuesta</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+</main>
+<footer>Reporte local. SMEE no envía correos ni realiza acciones externas.</footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+limits:
+  minimum_words: 35
+  maximum_words: 60
+
+# The monitor is currently scoped to Mexico's 2027 electoral cycle. An explicit
+# year or year range in the article always takes precedence over this fallback.
+default_electoral_year: "2027"
+
+event_phrases:
+  Nueva encuesta: una encuesta de preferencias electorales
+  Registro o anuncio de candidatura: un registro o anuncio de candidatura
+  Renuncia o declinación: una renuncia o declinación política
+  Cambio de candidatura: un cambio de candidatura
+  Coalición o alianza: una coalición o alianza electoral
+  Ruptura interna: una ruptura interna partidista
+  Resolución electoral: una resolución de una autoridad electoral
+  Impugnación: una impugnación electoral
+  Sanción electoral: una sanción electoral
+  Declaración política relevante: una declaración política relacionada con la elección
+  Evento de seguridad con impacto político: un hecho de seguridad con impacto electoral
+  Programa social relevante: un programa social vinculado con el proceso electoral
+  Movimiento partidista: un movimiento partidista
+  Nombramiento partidista: un nombramiento partidista
+  Inicio o cierre de precampaña: el inicio o cierre de una precampaña
+  Publicación oficial de calendario electoral: la publicación de un calendario electoral
+  Otro evento electoral: un hecho relacionado con el proceso electoral
+
+# Lower values are more prudent. These forms are used only for comparison; the
+# generator retains the actual tense found in the source text.
+verbs:
+  - canonical: decir
+    strength: 1
+    forms: [dijo, dice, declaró, declara, comentó, comenta, expresó, expresa]
+  - canonical: señalar
+    strength: 2
+    forms: [señaló, señala, indicó, indica, informó, informa, reportó, reporta, mencionó, menciona]
+  - canonical: considerar
+    strength: 2
+    forms: [consideró, considera, estimó, estima, planteó, plantea, prevé]
+  - canonical: afirmar
+    strength: 3
+    forms: [afirmó, afirma, sostuvo, sostiene, aseguró, asegura]
+  - canonical: advertir
+    strength: 4
+    forms: [advirtió, advierte, alertó, alerta, acusó, acusa, denunció, denuncia]
+  - canonical: confirmar
+    strength: 5
+    forms: [confirmó, confirma, garantizó, garantiza, demostró, demuestra]
+  - canonical: acción electoral
+    strength: 2
+    forms: [registró, registra, se registró, se registra, presentó, presenta, solicitó, solicita, aprobó, aprueba, emitió, emite, renunció, renuncia, declinó, declina, reunió, reúne, inició, inicia]
+
+excluded_patterns:
+  - "en opinión del autor"
+  - "a juicio del autor"
+  - "esta columna"
+  - "el columnista"
+  - "probablemente"
+  - "sin duda"
+  - "todo indica que"
+  - "¿"
+  - "?"
+
+future_consequence_patterns:
+  - ganará
+  - arrasará
+  - provocará
+  - generará
+  - garantizará
+  - ocasionará
+  - reconfigurará
+  - determinará
+
+attribution_forms:
+  - dijo
+  - declaró
+  - señaló
+  - indicó
+  - afirmó
+  - sostuvo
+  - aseguró
+  - consideró
+  - estimó
+  - advirtió
+  - prevé

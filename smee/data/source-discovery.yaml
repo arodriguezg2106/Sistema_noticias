@@ -1,0 +1,31 @@
+generated_at: '2026-07-31T22:00:55.386923-06:00'
+registry_sources: 45
+inspected_sources: 2
+results:
+- name: El Norte
+  base_url: https://elnorte.com
+  states:
+  - Nuevo León
+  source_type: media
+  status: active
+  robots_allowed: true
+  endpoints:
+  - endpoint_type: sitemap_index
+    url: https://www.elnorte.com/sitemap_index.xml
+    source: robots
+  - endpoint_type: rss
+    url: https://elnorte.com/rss/portada.xml
+    source: html_link
+  - endpoint_type: sitemap
+    url: https://elnorte.com/sitemap.xml
+    source: common_path
+  errors: []
+- name: ABC Noticias
+  base_url: https://abcnoticias.mx
+  states:
+  - Nuevo León
+  source_type: media
+  status: reachable_without_xml
+  robots_allowed: true
+  endpoints: []
+  errors: []

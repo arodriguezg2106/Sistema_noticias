@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SMEE — Reporte ejecutivo</title>
+  <style>
+    :root { --ink:#172033; --muted:#687386; --paper:#f5f7fb; --card:#fff;
+      --accent:#185adb; --critical:#a61b1b; --high:#c35b08; --line:#dfe5ef; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:15px/1.55 system-ui,sans-serif; }
+    header { padding:34px max(5vw,24px); color:white; background:linear-gradient(120deg,#102047,#185adb); }
+    header h1 { margin:0 0 4px; font-size:clamp(25px,4vw,40px); }
+    header p { margin:0; opacity:.82; }
+    main { max-width:1200px; margin:auto; padding:28px max(3vw,18px) 60px; }
+    h2 { margin:34px 0 14px; font-size:21px; }
+    h3 { margin:0; font-size:17px; }
+    .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+    .metric,.card,.empty { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+    .metric b { display:block; font-size:30px; color:var(--accent); }
+    .metric span,.meta { color:var(--muted); font-size:13px; }
+    .activity { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { border-radius:999px; padding:5px 10px; background:#e8eefc; color:#173d89; }
+    .card { margin:10px 0; border-left:5px solid #7891bd; }
+    .card.Crítico { border-left-color:var(--critical); }
+    .card.Alto { border-left-color:var(--high); }
+    .title-row { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .score { white-space:nowrap; font-weight:700; }
+    .reasons { margin:9px 0; color:#39465d; }
+    details { margin-top:10px; }
+    a { color:#1554c0; }
+    .review { border-left-color:#7b3fb2; }
+    .notice { margin-bottom:18px; padding:13px 16px; border:1px solid #e0bd57; border-radius:9px; background:#fff8dd; color:#654d00; }
+    .mock-source { color:var(--muted); }
+    footer { text-align:center; color:var(--muted); padding:28px; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>SMEE</h1>
+  <p>Monitoreo de Eventos Estratégicos · Generado {{ generated_at.strftime('%d/%m/%Y %H:%M %Z') }}</p>
+</header>
+<main>
+  {% if has_mock_data %}<div class="notice"><strong>Datos de demostración.</strong> Las fuentes simuladas no tienen enlace externo y no representan publicaciones reales.</div>{% endif %}
+  <section class="metrics">
+    <div class="metric"><b>{{ summary.new_events }}</b><span>eventos nuevos</span></div>
+    <div class="metric"><b>{{ summary.updated_events }}</b><span>eventos actualizados</span></div>
+    <div class="metric"><b>{{ summary.already_seen }}</b><span>entradas ya almacenadas</span></div>
+    <div class="metric"><b>{{ summary.duplicates }}</b><span>duplicados retenidos</span></div>
+    <div class="metric"><b>{{ summary.review_items }}</b><span>elementos para revisión</span></div>
+  </section>
+
+  <h2>Entidades con mayor actividad</h2>
+  <div class="activity">
+    {% for state, count in state_activity %}<span class="tag">{{ state }} · {{ count }}</span>{% else %}<span class="empty">Sin actividad</span>{% endfor %}
+  </div>
+
+  <h2>Prioridad crítica y alta</h2>
+  {% for event in high_priority %}
+    <article class="card {{ event.importance_level }}">
+      <div class="title-row"><h3>{{ event.title }}</h3><span class="score">{{ event.importance_level }} · {{ event.priority_score }}</span></div>
+      <div class="meta">{{ event.state }} · {{ event.event_type }} · {{ event.event_code }}</div>
+      <p>{{ event.description }}</p>
+      <div class="reasons">{{ event.score_reasons | join(' · ') }}</div>
+    </article>
+  {% else %}<div class="empty">No hay eventos críticos o altos.</div>{% endfor %}
+
+  <h2>Eventos por entidad federativa</h2>
+  {% for state, events in events_by_state %}
+    <h3>{{ state }}</h3>
+    {% for event in events %}
+      <article class="card {{ event.importance_level }}">
+        <div class="title-row"><h3>{{ event.title }}</h3><span class="score">{{ event.importance_level }} · {{ event.priority_score }}</span></div>
+        <div class="meta">{{ event.event_type }}{% if event.municipality %} · {{ event.municipality }}{% endif %} · Estado del evento: {{ event.status }}</div>
+        <p>{{ event.description }}</p>
+        <div><strong>Actores:</strong> {{ event.actors | join(', ') if event.actors else 'No detectados' }}</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> {{ event.score_reasons | join(' · ') }}</div>
+        <details><summary>Fuentes asociadas ({{ event.publications | length }})</summary>
+          <ul>{% for publication in event.publications %}<li>{% if publication.is_mock %}<span class="mock-source">{{ publication.source_name }} — {{ publication.title }} (fuente simulada; sin enlace externo)</span>{% else %}<a href="{{ publication.url }}" rel="noopener noreferrer">{{ publication.source_name }} — {{ publication.title }}</a>{% endif %}{% if publication.is_primary_source %} (principal){% elif publication.relationship_type == 'duplicate' %} (duplicado retenido){% endif %}</li>{% endfor %}</ul>
+        </details>
+      </article>
+    {% endfor %}
+  {% else %}<div class="empty">No se detectaron eventos.</div>{% endfor %}
+
+  <h2>Revisión manual</h2>
+  {% for item in review_items %}
+    <article class="card review">
+      <h3>{% if item.is_mock %}{{ item.title }} <span class="mock-source">(fuente simulada)</span>{% else %}<a href="{{ item.url }}" rel="noopener noreferrer">{{ item.title }}</a>{% endif %}</h3>
+      <div class="meta">{{ item.source_name }} · {{ item.state_detected or 'Sin entidad' }} · {{ item.event_type_detected or 'Sin tipo' }}</div>
+      <div>{{ item.review_reasons | join(' · ') }}</div>
+    </article>
+  {% else %}<div class="empty">No hay publicaciones pendientes de revisión.</div>{% endfor %}
+</main>
+<footer>Reporte local. SMEE no envía correos ni realiza acciones externas.</footer>
+</body>
+</html>

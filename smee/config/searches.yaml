@@ -1,0 +1,11 @@
+searches:
+  - name: elecciones_gubernaturas_2027
+    query: 'elecciones gubernatura 2027 México'
+    enabled: true
+  - name: encuestas_estatales
+    query: 'encuesta intención de voto gubernatura'
+    enabled: true
+  - name: justicia_electoral
+    query: 'resolución impugnación tribunal electoral gubernatura'
+    enabled: true
+

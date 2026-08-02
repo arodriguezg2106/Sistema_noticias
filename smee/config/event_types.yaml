@@ -1,0 +1,103 @@
+detection:
+  minimum_event_score: 2
+  event_ambiguity_margin: 1
+  catalog_clear_margin: 2
+
+event_types:
+  - name: Nueva encuesta
+    positive:
+      - {pattern: encuesta, weight: 3}
+      - {pattern: sondeo, weight: 3}
+      - {pattern: intención de voto, weight: 4}
+      - {pattern: preferencia electoral, weight: 3}
+    negative:
+      - {pattern: encuesta de servicio, weight: 3}
+  - name: Registro o anuncio de candidatura
+    positive:
+      - {pattern: candidatura, weight: 2}
+      - {pattern: se registra como candidat, weight: 4, regex: true}
+      - {pattern: se registra .* candidat, weight: 5, regex: true}
+      - {pattern: inscribir.* candidat, weight: 5, regex: true}
+      - {pattern: candidato a gobernar, weight: 4}
+      - {pattern: aspirante a la gubernatura, weight: 4}
+      - {pattern: registro para la gubernatura, weight: 4}
+      - {pattern: anuncia su candidatura, weight: 4}
+  - name: Renuncia o declinación
+    positive:
+      - {pattern: renunció, weight: 4}
+      - {pattern: presentó su renuncia, weight: 4}
+      - {pattern: dejó el cargo, weight: 3}
+      - {pattern: declinó, weight: 4}
+  - name: Cambio de candidatura
+    positive:
+      - {pattern: sustituye al candidato, weight: 5}
+      - {pattern: cambio de candidatura, weight: 5}
+      - {pattern: reemplazo de candidat, weight: 4, regex: true}
+  - name: Coalición o alianza
+    positive:
+      - {pattern: coalición, weight: 4}
+      - {pattern: alianza electoral, weight: 4}
+      - {pattern: convenio de coalición, weight: 5}
+  - name: Ruptura interna
+    positive:
+      - {pattern: ruptura interna, weight: 5}
+      - {pattern: división interna, weight: 4}
+      - {pattern: conflicto interno, weight: 3}
+  - name: Resolución electoral
+    positive:
+      - {pattern: tribunal electoral, weight: 2}
+      - {pattern: TEPJF, weight: 3}
+      - {pattern: sentencia, weight: 3}
+      - {pattern: resolución electoral, weight: 4}
+  - name: Impugnación
+    positive:
+      - {pattern: impugnación, weight: 4}
+      - {pattern: impugna, weight: 3}
+      - {pattern: recurso de inconformidad, weight: 4}
+  - name: Sanción electoral
+    positive:
+      - {pattern: sanción electoral, weight: 5}
+      - {pattern: multa electoral, weight: 4}
+      - {pattern: fiscalización, weight: 2}
+  - name: Declaración política relevante
+    positive:
+      - {pattern: declaración política, weight: 3}
+      - {pattern: afirmó que, weight: 2}
+      - {pattern: postura política, weight: 3}
+  - name: Evento de seguridad con impacto político
+    positive:
+      - {pattern: atentado, weight: 4}
+      - {pattern: amenaza contra candidat, weight: 5, regex: true}
+      - {pattern: violencia electoral, weight: 5}
+  - name: Programa social relevante
+    positive:
+      - {pattern: programa social, weight: 4}
+      - {pattern: apoyo social, weight: 2}
+      - {pattern: padrón de beneficiarios, weight: 3}
+  - name: Movimiento partidista
+    positive:
+      - {pattern: cambia de partido, weight: 5}
+      - {pattern: se incorpora al partido, weight: 4}
+      - {pattern: afiliación partidista, weight: 3}
+  - name: Nombramiento partidista
+    positive:
+      - {pattern: nombramiento partidista, weight: 5}
+      - {pattern: dirigencia estatal, weight: 3}
+      - {pattern: nuevo dirigente, weight: 4}
+  - name: Inicio o cierre de precampaña
+    positive:
+      - {pattern: inicia la precampaña, weight: 5}
+      - {pattern: cierre de precampaña, weight: 5}
+      - {pattern: precampaña, weight: 2}
+  - name: Publicación oficial de calendario electoral
+    positive:
+      - {pattern: calendario electoral, weight: 5}
+      - {pattern: calendario del proceso electoral, weight: 5}
+      - {pattern: plan integral y calendario, weight: 5}
+      - {pattern: proceso electoral local, weight: 2}
+      - {pattern: jornada electoral, weight: 2}
+  - name: Otro evento electoral
+    positive:
+      - {pattern: elección, weight: 2}
+      - {pattern: elecciones, weight: 2}
+      - {pattern: gubernatura, weight: 2}

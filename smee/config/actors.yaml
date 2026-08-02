@@ -1,0 +1,36 @@
+actors:
+  - name: Instituto Nacional Electoral
+    actor_type: institution
+    party: null
+    state: null
+    aliases: [INE]
+    is_active: true
+    is_priority: false
+  - name: Aldo Fasci
+    actor_type: political
+    party: PAN
+    state: Nuevo León
+    aliases: [Aldo Fasci Zuazua, Fasci]
+    is_active: true
+    is_priority: true
+  - name: María López
+    actor_type: political
+    party: PAN
+    state: Chihuahua
+    aliases: [María Elena López, M. López]
+    is_active: true
+    is_priority: true
+  - name: Juan Pérez
+    actor_type: political
+    party: Morena
+    state: Chihuahua
+    aliases: [Juan Carlos Pérez, J. Pérez]
+    is_active: true
+    is_priority: false
+  - name: Ana Torres
+    actor_type: political
+    party: Movimiento Ciudadano
+    state: Jalisco
+    aliases: [Ana Lucía Torres]
+    is_active: true
+    is_priority: true

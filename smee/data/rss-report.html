@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SMEE — Reporte ejecutivo</title>
+  <style>
+    :root { --ink:#172033; --muted:#687386; --paper:#f5f7fb; --card:#fff;
+      --accent:#185adb; --critical:#a61b1b; --high:#c35b08; --line:#dfe5ef; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:15px/1.55 system-ui,sans-serif; }
+    header { padding:34px max(5vw,24px); color:white; background:linear-gradient(120deg,#102047,#185adb); }
+    header h1 { margin:0 0 4px; font-size:clamp(25px,4vw,40px); }
+    header p { margin:0; opacity:.82; }
+    main { max-width:1200px; margin:auto; padding:28px max(3vw,18px) 60px; }
+    h2 { margin:34px 0 14px; font-size:21px; }
+    h3 { margin:0; font-size:17px; }
+    .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+    .metric,.card,.empty { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+    .metric b { display:block; font-size:30px; color:var(--accent); }
+    .metric span,.meta { color:var(--muted); font-size:13px; }
+    .activity { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag { border-radius:999px; padding:5px 10px; background:#e8eefc; color:#173d89; }
+    .card { margin:10px 0; border-left:5px solid #7891bd; }
+    .card.Crítico { border-left-color:var(--critical); }
+    .card.Alto { border-left-color:var(--high); }
+    .title-row { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .score { white-space:nowrap; font-weight:700; }
+    .reasons { margin:9px 0; color:#39465d; }
+    details { margin-top:10px; }
+    a { color:#1554c0; }
+    .review { border-left-color:#7b3fb2; }
+    .notice { margin-bottom:18px; padding:13px 16px; border:1px solid #e0bd57; border-radius:9px; background:#fff8dd; color:#654d00; }
+    .mock-source { color:var(--muted); }
+    footer { text-align:center; color:var(--muted); padding:28px; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>SMEE</h1>
+  <p>Monitoreo de Eventos Estratégicos · Generado 31/07/2026 22:35 Hora estándar central (México)</p>
+</header>
+<main>
+  
+  <section class="metrics">
+    <div class="metric"><b>0</b><span>eventos nuevos</span></div>
+    <div class="metric"><b>0</b><span>eventos actualizados</span></div>
+    <div class="metric"><b>24</b><span>entradas ya almacenadas</span></div>
+    <div class="metric"><b>0</b><span>duplicados retenidos</span></div>
+    <div class="metric"><b>0</b><span>elementos para revisión</span></div>
+  </section>
+
+  <h2>Entidades con mayor actividad</h2>
+  <div class="activity">
+    <span class="tag">Nacional · 2</span><span class="tag">Chihuahua · 2</span><span class="tag">Coahuila · 2</span><span class="tag">Colima · 2</span><span class="tag">Nuevo León · 1</span><span class="tag">Querétaro · 1</span><span class="tag">Baja California · 1</span><span class="tag">San Luis Potosí · 1</span><span class="tag">Sinaloa · 1</span>
+  </div>
+
+  <h2>Prioridad crítica y alta</h2>
+  
+    <article class="card Alto">
+      <div class="title-row"><h3>Planeará y organizará INE más de 500 actividades del Proceso Electoral Federal 2026‑2027</h3><span class="score">Alto · 13</span></div>
+      <div class="meta">Nacional · Publicación oficial de calendario electoral · SMEE-20260801-773DCE01</div>
+      <p>Instituto Nacional Electoral: número: 330 El inicio está previsto para el próximo 10 de septiembre, acompañado de la observación electoral. El asunto electoral principal corresponde a la publicación de un calendario electoral en Nacional, con referencia directa a ningún partido identificado, dentro del proceso electoral de 2026-2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+      <div class="reasons">Tipo 'Publicación oficial de calendario electoral': +8 · Fuente oficial: +5</div>
+    </article>
+  
+    <article class="card Alto">
+      <div class="title-row"><h3>Fasci no logra inscribirse como candidato del PAN</h3><span class="score">Alto · 12</span></div>
+      <div class="meta">Nuevo León · Registro o anuncio de candidatura · SMEE-20260731-87D95F84</div>
+      <p>Aldo Fasci falla en su intento de inscribirse, de manera extemporánea, como candidato en el PAN estatal; lo remiten al CEN albiazul. El asunto electoral principal corresponde a un registro o anuncio de candidatura en Nuevo León, con referencia directa a PAN, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+      <div class="reasons">Tipo 'Registro o anuncio de candidatura': +8 · Actor prioritario: +4</div>
+    </article>
+  
+
+  <h2>Eventos por entidad federativa</h2>
+  
+    <h3>Baja California</h3>
+    
+      <article class="card Medio">
+        <div class="title-row"><h3>Morena y PT definirán alianza electoral en Baja California</h3><span class="score">Medio · 7</span></div>
+        <div class="meta">Coalición o alianza · Estado del evento: detected</div>
+        <p>Morena y PT definirán alianza electoral en Baja California. El asunto electoral principal corresponde a una coalición o alianza electoral en Baja California, con referencia directa a Morena y Partido del Trabajo, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Coalición o alianza': +7</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/baja-california/baja-california-alianza-morena-pt" rel="noopener noreferrer">El Congresista — Morena y PT definirán alianza electoral en Baja California</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Chihuahua</h3>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Morena reúne a aspirantes a la gubernatura de Chihuahua para 2027</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Chihuahua · Estado del evento: detected</div>
+        <p>Morena reúne a aspirantes a la gubernatura de Chihuahua para 2027. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Chihuahua, con referencia directa a Morena, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/chihuahua/morena-reune-aspirantes-gubernatura-chihuahua-2027" rel="noopener noreferrer">El Congresista — Morena reúne a aspirantes a la gubernatura de Chihuahua para 2027</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Mayra Chavez asume mesa de seguridad en Juárez a días de su candidatura</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Chihuahua · Estado del evento: detected</div>
+        <p>Mayra Chavez asume mesa de seguridad en Juárez a días de su candidatura. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Chihuahua, con referencia directa a Morena, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/chihuahua/mayra-chavez-seguridad-juarez-candidatura" rel="noopener noreferrer">El Congresista — Mayra Chavez asume mesa de seguridad en Juárez a días de su candidatura</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Coahuila</h3>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Coahuila: incertidumbre en la alianza PRI-UDC para 2027</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Estado del evento: detected</div>
+        <p>Coahuila: incertidumbre en la alianza PRI-UDC para 2027. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Coahuila, con referencia directa a PRI, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/coahuila/coahuila-incertidumbre-alianza-pri-udc-2027" rel="noopener noreferrer">El Congresista — Coahuila: incertidumbre en la alianza PRI-UDC para 2027</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Cambios en el gobierno estatal de Coahuila anticipan precampañas</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Estado del evento: detected</div>
+        <p>Cambios en el gobierno estatal de Coahuila anticipan precampañas. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Coahuila, con referencia directa a PRI y Morena, dentro del proceso electoral de 2024; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/coahuila/cambios-gobierno-coahuila-2024" rel="noopener noreferrer">El Congresista — Cambios en el gobierno estatal de Coahuila anticipan precampañas</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Colima</h3>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Fracturas en la alianza Morena-PVEM crean incertidumbre electoral</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Colima · Estado del evento: detected</div>
+        <p>Fracturas en la alianza Morena-PVEM crean incertidumbre electoral. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Colima, con referencia directa a Morena, Partido Verde y Partido del Trabajo, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/colima/fracturas-en-la-alianza-morena-pvem" rel="noopener noreferrer">El Congresista — Fracturas en la alianza Morena-PVEM crean incertidumbre electoral</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Recortes presupuestales debilitan OPLE para elecciones 2027</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Colima · Estado del evento: detected</div>
+        <p>Recortes presupuestales debilitan OPLE para elecciones 2027. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Colima, con referencia directa a ningún partido identificado, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/colima/recortes-ople-elecciones-2027" rel="noopener noreferrer">El Congresista — Recortes presupuestales debilitan OPLE para elecciones 2027</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Nacional</h3>
+    
+      <article class="card Alto">
+        <div class="title-row"><h3>Planeará y organizará INE más de 500 actividades del Proceso Electoral Federal 2026‑2027</h3><span class="score">Alto · 13</span></div>
+        <div class="meta">Publicación oficial de calendario electoral · Estado del evento: updated</div>
+        <p>Instituto Nacional Electoral: número: 330 El inicio está previsto para el próximo 10 de septiembre, acompañado de la observación electoral. El asunto electoral principal corresponde a la publicación de un calendario electoral en Nacional, con referencia directa a ningún partido identificado, dentro del proceso electoral de 2026-2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> Instituto Nacional Electoral</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Publicación oficial de calendario electoral': +8 · Fuente oficial: +5</div>
+        <details><summary>Fuentes asociadas (3)</summary>
+          <ul><li><a href="https://centralelectoral.ine.mx/2026/07/31/planeara-y-organizara-ine-mas-de-500-actividades-del-proceso-electoral-federal-2026%e2%80%912027/" rel="noopener noreferrer">Central Electoral INE — Planeará y organizará INE más de 500 actividades del Proceso Electoral Federal 2026‑2027</a> (principal)</li><li><a href="https://www.elfinanciero.com.mx/nacional/2026/07/31/ine-dara-banderazo-a-las-elecciones-2027-el-proximo-septiembre/" rel="noopener noreferrer">El Financiero — INE dará banderazo a las elecciones 2027 el próximo septiembre</a></li><li><a href="https://centralelectoral.ine.mx/2026/07/31/ine-aprueba-plan-integral-y-calendario-del-proceso-electoral-federal-2026-2027/" rel="noopener noreferrer">Central Electoral INE — INE aprueba plan integral y calendario del Proceso Electoral Federal 2026-2027</a></li></ul>
+        </details>
+      </article>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>INE solicita más de 36 mil millones de pesos para elecciones 2027</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Estado del evento: detected</div>
+        <p>Instituto Nacional Electoral: iNE solicita más de 36 mil millones de pesos para elecciones 2027. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Nacional, con referencia directa a ningún partido identificado, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> Instituto Nacional Electoral</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/nacional/ine-presupuesto-2027" rel="noopener noreferrer">El Congresista — INE solicita más de 36 mil millones de pesos para elecciones 2027</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Nuevo León</h3>
+    
+      <article class="card Alto">
+        <div class="title-row"><h3>Fasci no logra inscribirse como candidato del PAN</h3><span class="score">Alto · 12</span></div>
+        <div class="meta">Registro o anuncio de candidatura · Estado del evento: updated</div>
+        <p>Aldo Fasci falla en su intento de inscribirse, de manera extemporánea, como candidato en el PAN estatal; lo remiten al CEN albiazul. El asunto electoral principal corresponde a un registro o anuncio de candidatura en Nuevo León, con referencia directa a PAN, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> Aldo Fasci</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Registro o anuncio de candidatura': +8 · Actor prioritario: +4</div>
+        <details><summary>Fuentes asociadas (4)</summary>
+          <ul><li><a href="https://www.elnorte.com/fasci-no-logra-inscribirse-como-candidato-del-pan/ar3250331" rel="noopener noreferrer">El Norte — Fasci no logra inscribirse como candidato del PAN</a> (principal)</li><li><a href="https://elcongresista.mx/politica/nuevo-leon/aldo-fasci-registrado-monterrey" rel="noopener noreferrer">El Congresista — Aldo Fasci se registra como aspirante al gobierno de Monterrey</a></li><li><a href="https://elcongresista.mx/politica/nuevo-leon/aldo-fasci-registro-pan-gobernador-nuevo-leon" rel="noopener noreferrer">El Congresista — Aldo Fasci se registra al PAN como candidato a gobernar Nuevo León</a></li><li><a href="https://elcongresista.mx/politica/nuevo-leon/aldofasci-registro-gubernatura-alcaldia" rel="noopener noreferrer">El Congresista — Aldo Fasci no logra su registro para la gubernatura y alcaldía</a></li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Querétaro</h3>
+    
+      <article class="card Medio">
+        <div class="title-row"><h3>PAN lidera intención de voto para gubernatura de Querétaro 2027</h3><span class="score">Medio · 8</span></div>
+        <div class="meta">Nueva encuesta · Querétaro · Estado del evento: detected</div>
+        <p>PAN lidera intención de voto para gubernatura de Querétaro 2027. El asunto electoral principal corresponde a una encuesta de preferencias electorales en Querétaro, con referencia directa a PAN y Morena, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Nueva encuesta': +8</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/queretaro/pan-intencion-voto-queretaro-2027" rel="noopener noreferrer">El Congresista — PAN lidera intención de voto para gubernatura de Querétaro 2027</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>San Luis Potosí</h3>
+    
+      <article class="card Medio">
+        <div class="title-row"><h3>Somos México impugna reforma electoral en San Luis Potosí</h3><span class="score">Medio · 7</span></div>
+        <div class="meta">Impugnación · San Luis Potosí · Estado del evento: detected</div>
+        <p>Somos México impugna reforma electoral en San Luis Potosí. El asunto electoral principal corresponde a una impugnación electoral en San Luis Potosí, con referencia directa a ningún partido identificado, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Impugnación': +7</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/san-luis-potosi/somos-mexico-impugna-reforma-electoral-slp" rel="noopener noreferrer">El Congresista — Somos México impugna reforma electoral en San Luis Potosí</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+    <h3>Sinaloa</h3>
+    
+      <article class="card Bajo">
+        <div class="title-row"><h3>Morena reúne a nueve aspirantes en CDMX para candidatura en Sinaloa</h3><span class="score">Bajo · 3</span></div>
+        <div class="meta">Otro evento electoral · Estado del evento: detected</div>
+        <p>Morena reúne a nueve aspirantes en CDMX para candidatura en Sinaloa. El asunto electoral principal corresponde a un hecho relacionado con el proceso electoral en Sinaloa, con referencia directa a Morena, dentro del proceso electoral de 2027; estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado.</p>
+        <div><strong>Actores:</strong> No detectados</div>
+        <div class="reasons"><strong>Razones del puntaje:</strong> Tipo 'Otro evento electoral': +3</div>
+        <details><summary>Fuentes asociadas (1)</summary>
+          <ul><li><a href="https://elcongresista.mx/politica/sinaloa/morena-aspirantes-candidatura-sinaloa" rel="noopener noreferrer">El Congresista — Morena reúne a nueve aspirantes en CDMX para candidatura en Sinaloa</a> (principal)</li></ul>
+        </details>
+      </article>
+    
+  
+
+  <h2>Revisión manual</h2>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/colima/recortes-ople-elecciones-2027" rel="noopener noreferrer">Recortes presupuestales debilitan OPLE para elecciones 2027</a></h3>
+      <div class="meta">El Congresista · Colima · Otro evento electoral</div>
+      <div>Varios tipos de evento obtuvieron puntuaciones equivalentes</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/nacional/ine-proceso-electoral-2027" rel="noopener noreferrer">INE inicia proceso electoral 2027 el 10 de septiembre</a></h3>
+      <div class="meta">El Congresista · Sin entidad · Otro evento electoral</div>
+      <div>No se detectó una entidad federativa · Falta entidad o ámbito geográfico</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/baja-california/baja-california-alianza-morena-pt" rel="noopener noreferrer">Morena y PT definirán alianza electoral en Baja California</a></h3>
+      <div class="meta">El Congresista · Baja California · Coalición o alianza</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/coahuila/cambios-gobierno-coahuila-2024" rel="noopener noreferrer">Cambios en el gobierno estatal de Coahuila anticipan precampañas</a></h3>
+      <div class="meta">El Congresista · Coahuila · Otro evento electoral</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/colima/fracturas-en-la-alianza-morena-pvem" rel="noopener noreferrer">Fracturas en la alianza Morena-PVEM crean incertidumbre electoral</a></h3>
+      <div class="meta">El Congresista · Colima · Otro evento electoral</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://elcongresista.mx/politica/chihuahua/mayra-chavez-seguridad-juarez-candidatura" rel="noopener noreferrer">Mayra Chavez asume mesa de seguridad en Juárez a días de su candidatura</a></h3>
+      <div class="meta">El Congresista · Chihuahua · Otro evento electoral</div>
+      <div>Varios tipos de evento obtuvieron puntuaciones equivalentes</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://www.elfinanciero.com.mx/nacional/2026/07/31/ine-dara-banderazo-a-las-elecciones-2027-el-proximo-septiembre/" rel="noopener noreferrer">INE dará banderazo a las elecciones 2027 el próximo septiembre</a></h3>
+      <div class="meta">El Financiero · Nacional · Publicación oficial de calendario electoral</div>
+      <div>Se detectaron varios partidos con fuerza similar</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://centralelectoral.ine.mx/2026/07/31/invita-ine-veracruz-a-participar-en-el-concurso-publico-2026-para-ingresar-al-servicio-profesional-electoral-nacional-sistema-ople/" rel="noopener noreferrer">Invita INE Veracruz a participar en el Concurso Público 2026 para ingresar al Servicio Profesional Electoral Nacional Sistema OPLE</a></h3>
+      <div class="meta">Central Electoral INE · Veracruz · Sin tipo</div>
+      <div>No se alcanzó el umbral para clasificar el tipo de evento · Falta el tipo de evento o una fecha verificable</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://centralelectoral.ine.mx/2026/07/31/conoce-como-realizar-las-candidaturas-independientes/" rel="noopener noreferrer">Conoce como realizar las Candidaturas Independientes</a></h3>
+      <div class="meta">Central Electoral INE · Sin entidad · Sin tipo</div>
+      <div>No se alcanzó el umbral para clasificar el tipo de evento · No se detectó una entidad federativa · Falta el tipo de evento o una fecha verificable</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://centralelectoral.ine.mx/2026/07/31/entrevista-del-consejero-electoral-uuc-kib-espadas-con-salvador-garcia-soto-para-a-la-una/" rel="noopener noreferrer">Entrevista del Consejero Electoral Uuc-kib Espadas con Salvador García Soto para «A la una»</a></h3>
+      <div class="meta">Central Electoral INE · Sin entidad · Sin tipo</div>
+      <div>No se alcanzó el umbral para clasificar el tipo de evento · No se detectó una entidad federativa · Falta el tipo de evento o una fecha verificable</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://centralelectoral.ine.mx/2026/07/31/entrevista-del-consejero-electoral-uuc-kib-espadas-con-veronica-mendez-para-w-radio/" rel="noopener noreferrer">Entrevista del Consejero Electoral Uuc-kib Espadas con Verónica Méndez para W Radio</a></h3>
+      <div class="meta">Central Electoral INE · Sin entidad · Otro evento electoral</div>
+      <div>No se detectó una entidad federativa · Falta entidad o ámbito geográfico</div>
+    </article>
+  
+    <article class="card review">
+      <h3><a href="https://centralelectoral.ine.mx/2026/07/31/aprueba-comision-de-vinculacion-el-calendario-de-entrevistas-para-personas-aspirantes-a-presidencias-y-consejerias-electorales-de-organismos-publicos-locales/" rel="noopener noreferrer">Aprueba Comisión de Vinculación el calendario de entrevistas para personas aspirantes a Presidencias y Consejerías Electorales de Organismos Públicos Locales</a></h3>
+      <div class="meta">Central Electoral INE · Sin entidad · Sin tipo</div>
+      <div>No se alcanzó el umbral para clasificar el tipo de evento · No se detectó una entidad federativa · Falta el tipo de evento o una fecha verificable</div>
+    </article>
+  
+</main>
+<footer>Reporte local. SMEE no envía correos ni realiza acciones externas.</footer>
+</body>
+</html>

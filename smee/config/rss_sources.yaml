@@ -1,0 +1,61 @@
+settings:
+  user_agent: SMEE/0.2 (contacto local; lector RSS respetuoso)
+  timeout_seconds: 20
+  delay_between_feeds_seconds: 1
+  max_feed_bytes: 2000000
+  max_items_per_feed: 15
+  respect_robots: true
+
+feeds:
+  - source_name: Central Electoral INE
+    feed_url: https://centralelectoral.ine.mx/feed/
+    publication_type: official_release
+    filter_scope: title
+    max_items: 15
+    enabled: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - gubernatura
+      - candidatura
+      - tribunal
+      - sanción
+      - precampaña
+  - source_name: El Financiero
+    feed_url: https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml
+    publication_type: news
+    filter_scope: title
+    max_items: 15
+    enabled: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - coalición
+      - encuesta
+  - source_name: El Norte
+    feed_url: https://elnorte.com/rss/portada.xml
+    publication_type: news
+    filter_scope: title
+    max_items: 15
+    enabled: true
+    include_keywords:
+      - elección
+      - elecciones
+      - electoral
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - precampaña
+      - encuesta
+      - intención de voto
+      - coalición
+      - alianza electoral
+      - impugnación
+      - tribunal electoral

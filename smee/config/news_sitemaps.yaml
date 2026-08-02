@@ -1,0 +1,41 @@
+settings:
+  user_agent: SMEE/0.2 (contacto local; lector XML respetuoso)
+  timeout_seconds: 20
+  delay_between_sitemaps_seconds: 1
+  max_feed_bytes: 2000000
+  max_items_per_sitemap: 30
+  max_age_hours: 48
+  respect_robots: true
+
+sitemaps:
+  - source_name: El Congresista
+    sitemap_url: https://elcongresista.mx/sitemap-news.xml
+    max_items: 30
+    max_age_hours: 48
+    filter_scope: title
+    required_path_prefixes:
+      - /politica/
+    enabled: true
+    include_keywords:
+      - gubernatura
+      - elecciones 2027
+      - electoral 2027
+      - proceso electoral 2027
+      - candidatura
+      - candidato a gobernar
+      - aspirante al gobierno
+      - aspirantes a la gubernatura
+      - precampaña
+      - encuesta
+      - intención de voto
+      - coalición electoral
+      - alianza electoral
+      - alianza morena
+      - alianza pri
+      - alianza pan
+      - renuncia
+      - declinación
+      - impugnación
+      - impugna reforma electoral
+      - sanción electoral
+      - tribunal electoral

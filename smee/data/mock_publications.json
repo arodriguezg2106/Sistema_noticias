@@ -1,0 +1,63 @@
+[
+  {
+    "source_name": "Encuestadora Horizonte",
+    "external_id": "H-2027-001",
+    "title": "Nueva encuesta coloca a María López al frente en Chihuahua",
+    "url": "https://horizonte.example/estudios/chihuahua-2027?utm_source=boletin",
+    "published_at": "2026-07-28T14:00:00Z",
+    "author": "Equipo de estudios",
+    "raw_text": "La encuesta de intención de voto para la gubernatura de Chihuahua ubica a María López del PAN en primer lugar y a Juan Pérez de Morena en segundo.",
+    "publication_type": "poll"
+  },
+  {
+    "source_name": "Diario del Norte",
+    "external_id": "DN-8841",
+    "title": "Encuesta perfila a María López para la gubernatura de Chihuahua",
+    "url": "https://diariodelnorte.example/politica/encuesta-chihuahua",
+    "published_at": "2026-07-29T09:20:00Z",
+    "author": "Redacción",
+    "raw_text": "Un sondeo de intención de voto reporta ventaja para María López, del PAN, sobre Juan Pérez, de Morena, en Chihuahua.",
+    "publication_type": "news"
+  },
+  {
+    "source_name": "Diario del Norte",
+    "external_id": "DN-8841-COPY",
+    "title": "Encuesta perfila a María López para la gubernatura de Chihuahua",
+    "url": "https://www.diariodelnorte.example/politica/encuesta-chihuahua?utm_medium=social",
+    "published_at": "2026-07-29T09:20:00Z",
+    "author": "Redacción",
+    "raw_text": "Un sondeo de intención de voto reporta ventaja para María López, del PAN, sobre Juan Pérez, de Morena, en Chihuahua.",
+    "publication_type": "news"
+  },
+  {
+    "source_name": "Noticias de Occidente",
+    "external_id": "NO-229",
+    "title": "Ana Torres presentó su renuncia a la dirigencia estatal en Jalisco",
+    "url": "https://occidente.example/jalisco/renuncia-ana-torres",
+    "published_at": "2026-07-30T17:45:00Z",
+    "author": "Laura Gómez",
+    "raw_text": "Ana Torres, de Movimiento Ciudadano, presentó su renuncia y dejó el cargo en Guadalajara, Jalisco.",
+    "publication_type": "news"
+  },
+  {
+    "source_name": "Tribunal Electoral",
+    "external_id": "TE-2026-771",
+    "title": "Tribunal Electoral emite resolución sobre impugnación en Puebla",
+    "url": "https://www.te.gob.mx/sentencias/te-2026-771",
+    "published_at": "2026-07-30T20:00:00Z",
+    "author": "Sala Regional",
+    "raw_text": "El Tribunal Electoral emitió sentencia y resolución electoral respecto de una impugnación presentada en Puebla.",
+    "publication_type": "official_release"
+  },
+  {
+    "source_name": "Panorama Nacional",
+    "external_id": "PN-551",
+    "title": "Partidos preparan elecciones locales",
+    "url": "https://panorama.example/opinion/elecciones-locales",
+    "published_at": "2026-07-31T08:00:00Z",
+    "author": "Columna Política",
+    "raw_text": "La columna revisa los preparativos para las elecciones y gubernaturas en Chihuahua y Jalisco.",
+    "publication_type": "opinion"
+  }
+]
+

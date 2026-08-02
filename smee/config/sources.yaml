@@ -1,0 +1,55 @@
+sources:
+  - name: Central Electoral INE
+    source_type: official
+    base_url: https://centralelectoral.ine.mx
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: El Financiero
+    source_type: media
+    base_url: https://www.elfinanciero.com.mx
+    state: null
+    reliability_level: medium
+    is_active: true
+  - name: El Congresista
+    source_type: media
+    base_url: https://elcongresista.mx
+    state: null
+    reliability_level: medium
+    is_active: true
+  - name: El Norte
+    source_type: media
+    base_url: https://www.elnorte.com
+    state: Nuevo León
+    reliability_level: high
+    is_active: true
+  - name: Diario del Norte
+    source_type: media
+    base_url: https://diariodelnorte.example
+    state: Chihuahua
+    reliability_level: medium
+    is_active: true
+  - name: Encuestadora Horizonte
+    source_type: pollster
+    base_url: https://horizonte.example
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: Noticias de Occidente
+    source_type: media
+    base_url: https://occidente.example
+    state: Jalisco
+    reliability_level: medium
+    is_active: true
+  - name: Tribunal Electoral
+    source_type: official
+    base_url: https://www.te.gob.mx
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: Panorama Nacional
+    source_type: media
+    base_url: https://panorama.example
+    state: null
+    reliability_level: medium
+    is_active: true

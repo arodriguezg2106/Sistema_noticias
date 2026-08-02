@@ -1,0 +1,41 @@
+event_type_scores:
+  Nueva encuesta: 8
+  Registro o anuncio de candidatura: 8
+  Renuncia o declinación: 9
+  Cambio de candidatura: 10
+  Coalición o alianza: 7
+  Ruptura interna: 7
+  Resolución electoral: 9
+  Impugnación: 7
+  Sanción electoral: 8
+  Declaración política relevante: 5
+  Evento de seguridad con impacto político: 10
+  Programa social relevante: 6
+  Movimiento partidista: 6
+  Nombramiento partidista: 6
+  Inicio o cierre de precampaña: 7
+  Publicación oficial de calendario electoral: 8
+  Otro evento electoral: 3
+
+adjustments:
+  official_source: 5
+  multiple_independent_sources:
+    minimum: 3
+    score: 4
+  priority_actor: 4
+  opinion_column: -4
+  duplicate_publication: -5
+  unverified_date: -3
+
+levels:
+  Crítico: 15
+  Alto: 10
+  Medio: 7
+  Bajo: 3
+  Descartable: -999
+
+grouping:
+  temporal_window_days: 3
+  similarity_threshold: 0.62
+  shared_actor_bonus: 0.35
+  ambiguity_margin: 0.05
