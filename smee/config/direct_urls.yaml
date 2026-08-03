@@ -1,0 +1,16 @@
+# ==============================================================================
+# SMEE — URLs Directas de Interés
+# Agrega URLs específicas de reportajes, análisis o noticias clave
+# para ser ingestadas y procesadas directamente en el pipeline.
+# ==============================================================================
+
+direct_urls:
+  - url: "https://www.eluniversal.com.mx/nacion/morena-se-reune-con-aspirantes-a-candidaturas-para-gobernador-chihuahua-sinaloa-y-sonora-entre-ellos/"
+    source_name: "El Universal"
+    publication_type: "news"
+  - url: "https://politica.expansion.mx/mexico/2026/07/28/gobernadores-eligieron-su-sucesor-elecciones-2027"
+    source_name: "Expansión Política"
+    publication_type: "news"
+  - url: "https://www.eluniversal.com.mx/estados/ulises-mejia-haro-consolida-ventaja-hacia-gubernatura/"
+    source_name: "El Universal Estados"
+    publication_type: "news"

@@ -5,12 +5,55 @@ settings:
   max_feed_bytes: 2000000
   max_items_per_feed: 15
   respect_robots: true
+  # Terms that confirm a news item is about Mexican politics.
+  # Feeds with require_mexico_context: true must match at least one.
+  mexico_context_terms:
+    - México
+    - mexicano
+    - mexicana
+    - INE
+    - TEPJF
+    - gubernatura
+    - entidad federativa
+    - proceso electoral federal
+    - Aguascalientes
+    - Baja California
+    - Campeche
+    - Chiapas
+    - Chihuahua
+    - Ciudad de México
+    - CDMX
+    - Coahuila
+    - Colima
+    - Durango
+    - Estado de México
+    - Guanajuato
+    - Guerrero
+    - Hidalgo
+    - Jalisco
+    - Michoacán
+    - Morelos
+    - Nayarit
+    - Nuevo León
+    - Oaxaca
+    - Puebla
+    - Querétaro
+    - Quintana Roo
+    - San Luis Potosí
+    - Sinaloa
+    - Sonora
+    - Tabasco
+    - Tamaulipas
+    - Tlaxcala
+    - Veracruz
+    - Yucatán
+    - Zacatecas
 
 feeds:
   - source_name: Central Electoral INE
     feed_url: https://centralelectoral.ine.mx/feed/
     publication_type: official_release
-    filter_scope: title
+    filter_scope: all
     max_items: 15
     enabled: true
     include_keywords:
@@ -25,9 +68,10 @@ feeds:
   - source_name: El Financiero
     feed_url: https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml
     publication_type: news
-    filter_scope: title
+    filter_scope: all
     max_items: 15
     enabled: true
+    require_mexico_context: true
     include_keywords:
       - elección
       - electoral
@@ -38,10 +82,33 @@ feeds:
       - candidata
       - coalición
       - encuesta
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Harris
+      - Estados Unidos
+      - EE.UU.
+      - Venezuela
+      - Maduro
+      - Argentina
+      - Milei
+      - Colombia
+      - Petro
+      - Francia
+      - Macron
+      - Reino Unido
+      - Ucrania
+      - Rusia
+      - Putin
+      - China
+      - Israel
+      - Palestina
   - source_name: El Norte
     feed_url: https://elnorte.com/rss/portada.xml
     publication_type: news
-    filter_scope: title
+    filter_scope: all
     max_items: 15
     enabled: true
     include_keywords:
@@ -59,3 +126,133 @@ feeds:
       - alianza electoral
       - impugnación
       - tribunal electoral
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Venezuela
+      - Argentina
+      - Colombia
+      - Francia
+      - Rusia
+      - China
+  - source_name: El Universal
+    feed_url: https://www.eluniversal.com.mx/arc/outboundfeeds/rss/?outputType=xml
+    publication_type: news
+    filter_scope: all
+    max_items: 25
+    enabled: true
+    require_mexico_context: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - coalición
+      - encuesta
+      - ventaja
+      - consolida
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Harris
+      - Estados Unidos
+      - EE.UU.
+      - Venezuela
+      - Maduro
+      - Argentina
+      - Milei
+      - Colombia
+      - Petro
+      - Francia
+      - Macron
+      - Reino Unido
+      - Ucrania
+      - Rusia
+      - Putin
+      - China
+      - Israel
+      - Palestina
+  - source_name: El Universal Estados
+    feed_url: https://www.eluniversal.com.mx/arc/outboundfeeds/rss/category/estados/?outputType=xml
+    publication_type: news
+    filter_scope: all
+    max_items: 30
+    enabled: true
+    require_mexico_context: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - coalición
+      - encuesta
+      - ventaja
+      - consolida
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Harris
+      - Estados Unidos
+      - EE.UU.
+      - Venezuela
+      - Maduro
+      - Argentina
+      - Milei
+      - Colombia
+      - Petro
+      - Francia
+      - Macron
+      - Reino Unido
+      - Ucrania
+      - Rusia
+      - Putin
+      - China
+      - Israel
+      - Palestina
+  - source_name: Expansión Política
+    feed_url: https://politica.expansion.mx/rss
+    publication_type: news
+    filter_scope: all
+    max_items: 25
+    enabled: true
+    require_mexico_context: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - coalición
+      - encuesta
+      - gobernador
+      - gobernadores
+      - sucesor
+      - aspirantes
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Harris
+      - Venezuela
+      - Argentina
+      - Colombia
+      - Rusia
+      - Ucrania
+
+
+

@@ -208,7 +208,7 @@ class EventRepository:
                 item["publications"] = [
                     dict(row)
                     for row in connection.execute(
-                        """SELECT p.title, p.url, p.published_at, p.is_mock, s.name AS source_name,
+                        """SELECT p.id, p.title, p.url, p.published_at, p.is_mock, s.name AS source_name,
                                   ep.relationship_type, ep.is_primary_source
                            FROM publications p JOIN sources s ON s.id=p.source_id
                            JOIN event_publications ep ON ep.publication_id=p.id

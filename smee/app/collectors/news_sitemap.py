@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -31,6 +32,7 @@ class NewsSitemapConfig:
     max_items: int
     max_age_hours: int
     include_keywords: tuple[str, ...]
+    exclude_keywords: tuple[str, ...]
     required_path_prefixes: tuple[str, ...]
     filter_scope: str
 
@@ -44,12 +46,17 @@ class NewsSitemapConfig:
         if urlsplit(sitemap_url).scheme not in {"http", "https"}:
             raise CollectorError(f"News sitemap must use HTTP or HTTPS: {sitemap_url}")
         max_items = int(data.get("max_items", settings.get("max_items_per_sitemap", 30)))
-        max_age = int(data.get("max_age_hours", settings.get("max_age_hours", 48)))
+        fallback_age = settings.get("periodo_y_recoleccion", {}).get(
+            "antiguedad_maxima_horas", settings.get("max_age_hours", 48)
+        )
+        max_age = int(data.get("max_age_hours", fallback_age))
         if not 1 <= max_items <= 100:
             raise CollectorError(f"max_items must be between 1 and 100 for {source_name}")
         if not 1 <= max_age <= 168:
             raise CollectorError(f"max_age_hours must be between 1 and 168 for {source_name}")
         filter_scope = str(data.get("filter_scope", "title"))
+        if filter_scope == "all":
+            filter_scope = "title_and_metadata"
         if filter_scope not in {"title", "title_and_metadata"}:
             raise CollectorError(f"Invalid filter_scope for {source_name}: {filter_scope}")
         return cls(
@@ -58,6 +65,7 @@ class NewsSitemapConfig:
             max_items=max_items,
             max_age_hours=max_age,
             include_keywords=tuple(str(item) for item in data.get("include_keywords", [])),
+            exclude_keywords=tuple(str(item) for item in data.get("exclude_keywords", [])),
             required_path_prefixes=tuple(
                 str(item) for item in data.get("required_path_prefixes", [])
             ),
@@ -125,9 +133,15 @@ class NewsSitemapCollector(Collector):
         results: list[CollectedPublication] = []
         for url_node in [node for node in list(root) if _local_name(node.tag) == "url"]:
             url = self._descendant_text(url_node, "loc")
+            if not url:
+                continue
             title = self._descendant_text(url_node, "title")
-            date_text = self._descendant_text(url_node, "publication_date")
-            if not url or not title or not date_text:
+            if not title:
+                path_slug = urlsplit(url).path.strip("/").rsplit("/", 1)[-1]
+                if path_slug and not path_slug.endswith((".xml", ".html", ".php")):
+                    title = path_slug.replace("-", " ").strip().capitalize()
+            date_text = self._descendant_text(url_node, "publication_date", "lastmod")
+            if not title or not date_text:
                 continue
             published_at = self._parse_date(date_text)
             if published_at is None or published_at < oldest or published_at > now + timedelta(hours=1):
@@ -145,7 +159,13 @@ class NewsSitemapCollector(Collector):
                 else f"{title} {keywords} {caption}"
             )
             if sitemap.include_keywords and not any(
-                normalize_text(keyword) in searchable for keyword in sitemap.include_keywords
+                re.search(rf"(?<!\w){re.escape(normalize_text(kw))}", searchable)
+                for kw in sitemap.include_keywords
+            ):
+                continue
+            if sitemap.exclude_keywords and any(
+                re.search(rf"(?<!\w){re.escape(normalize_text(kw))}", searchable)
+                for kw in sitemap.exclude_keywords
             ):
                 continue
             results.append(
@@ -165,9 +185,10 @@ class NewsSitemapCollector(Collector):
         return results[: sitemap.max_items]
 
     @staticmethod
-    def _descendant_text(node: Any, name: str) -> str | None:
+    def _descendant_text(node: Any, *names: str) -> str | None:
+        expected = {name.lower() for name in names}
         for descendant in node.iter():
-            if _local_name(descendant.tag) == name:
+            if _local_name(descendant.tag) in expected:
                 text = "".join(descendant.itertext()).strip()
                 if text:
                     return text

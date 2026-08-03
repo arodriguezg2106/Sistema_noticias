@@ -10,6 +10,7 @@ from pathlib import Path
 from app.collectors import (
     CollectorError,
     CompositeCollector,
+    DirectURLCollector,
     MockCollector,
     NewsSitemapCollector,
     RSSCollector,
@@ -59,14 +60,25 @@ def main() -> int:
     logger = logging.getLogger(__name__)
     try:
         configs = ConfigLoader(args.config_dir).load_all()
+        # Merge central settings.yaml into collector configs if present
+        if "settings" in configs and isinstance(configs["settings"], dict):
+            for key in ("rss_sources", "news_sitemaps"):
+                if key in configs and isinstance(configs[key], dict):
+                    collector_settings = configs[key].setdefault("settings", {})
+                    if isinstance(collector_settings, dict):
+                        for k, v in configs["settings"].items():
+                            collector_settings.setdefault(k, v)
         database = Database(database_path)
         pipeline = ProcessingPipeline(database, configs)
         pipeline.initialize()
         if args.collector == "live":
-            collector = CompositeCollector([
+            collectors = [
                 RSSCollector(configs["rss_sources"]),
                 NewsSitemapCollector(configs["news_sitemaps"]),
-            ])
+            ]
+            if "direct_urls" in configs:
+                collectors.append(DirectURLCollector(configs))
+            collector = CompositeCollector(collectors)
         elif args.collector == "rss":
             collector = RSSCollector(configs["rss_sources"])
         else:

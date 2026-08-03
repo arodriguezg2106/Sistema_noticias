@@ -1,0 +1,37 @@
+# ==============================================================================
+# SMEE — Configuración Central del Sistema
+# Modifica los parámetros clave desde este único archivo de forma segura.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. PERIODO Y LÍMITES DE RECOLECCIÓN
+# ------------------------------------------------------------------------------
+periodo_y_recoleccion:
+  # Antigüedad máxima de noticias a recolectar en sitemaps XML (en horas)
+  # Ejemplo: 24 = 1 día, 48 = 2 días, 72 = 3 días, 168 = 1 semana
+  antiguedad_maxima_horas: 168
+
+  # Límite máximo de artículos a descargar por cada fuente RSS
+  limite_articulos_por_rss: 30
+
+  # Ventana de días (±días) para agrupar publicaciones en un mismo evento
+  ventana_agrupacion_dias: 3
+
+  # Año principal del proceso electoral monitoreado (ej. 2027)
+  ano_electoral_defecto: "2027"
+
+# ------------------------------------------------------------------------------
+# 2. PARÁMETROS DE RESÚMENES DETERMINISTAS
+# ------------------------------------------------------------------------------
+resumenes:
+  # Rango de palabras por resumen (mínimo y máximo)
+  palabras_minimas: 35
+  palabras_maximas: 60
+
+# ------------------------------------------------------------------------------
+# 3. FILTRADO Y CONTEXTO
+# ------------------------------------------------------------------------------
+filtrado:
+  # Exigir que las notas de medios nacionales de amplio espectro mencionen
+  # expresamente términos o entidades de México
+  exigir_contexto_mexico: true

@@ -25,6 +25,32 @@ event_phrases:
   Publicación oficial de calendario electoral: la publicación de un calendario electoral
   Otro evento electoral: un hecho relacionado con el proceso electoral
 
+# Varied context-sentence templates selected deterministically per summary.
+# Placeholders: {event_phrase}, {state}, {parties}, {year}.
+context_templates:
+  Nueva encuesta:
+    - "Esta información se inscribe en {event_phrase} en {state}, involucrando a {parties} en el ciclo {year}."
+    - "El hecho se enmarca en {event_phrase} con alcance en {state}, donde figuran {parties}, rumbo a las elecciones de {year}."
+  Registro o anuncio de candidatura:
+    - "El hecho ocurre en el marco de {event_phrase} en {state}, con la participación de {parties} de cara al proceso de {year}."
+    - "Este acontecimiento se relaciona con {event_phrase} en {state}; los actores vinculados son {parties}, en la ruta electoral de {year}."
+  Renuncia o declinación:
+    - "El suceso se enmarca en {event_phrase} en {state}, con implicaciones para {parties} en el proceso de {year}."
+    - "Este hecho corresponde a {event_phrase} en {state}, donde {parties} se ve afectado en el contexto electoral de {year}."
+  Coalición o alianza:
+    - "El evento se ubica en el contexto de {event_phrase} en {state}, donde participan {parties} de cara al proceso de {year}."
+    - "Este movimiento corresponde a {event_phrase} en {state}, involucrando a {parties} en el calendario electoral de {year}."
+  Resolución electoral:
+    - "La decisión se inscribe en {event_phrase} en {state}, con referencia a {parties} dentro del proceso de {year}."
+    - "Este pronunciamiento corresponde a {event_phrase} en {state}, afectando a {parties} en el ciclo electoral de {year}."
+  Evento de seguridad con impacto político:
+    - "El incidente se relaciona con {event_phrase} en {state}, con implicaciones para {parties} en el contexto electoral de {year}."
+    - "Este hecho de seguridad se enmarca en {event_phrase} en {state}, donde {parties} resulta afectado en el proceso de {year}."
+  _default:
+    - "El hecho se ubica en el contexto de {event_phrase} en {state}, con mención de {parties}, en el proceso electoral de {year}."
+    - "Este evento corresponde a {event_phrase} en {state}, donde se identifica a {parties} dentro del calendario electoral de {year}."
+    - "La información se inscribe en {event_phrase} en {state}, involucrando a {parties} en el ciclo electoral de {year}."
+
 # Lower values are more prudent. These forms are used only for comparison; the
 # generator retains the actual tense found in the source text.
 verbs:

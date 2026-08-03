@@ -6,22 +6,47 @@ detection:
 event_types:
   - name: Nueva encuesta
     positive:
-      - {pattern: encuesta, weight: 3}
-      - {pattern: sondeo, weight: 3}
-      - {pattern: intención de voto, weight: 4}
-      - {pattern: preferencia electoral, weight: 3}
+      - {pattern: "encuesta electoral", weight: 4}
+      - {pattern: "encuesta estatal", weight: 4}
+      - {pattern: "encuesta interna", weight: 4}
+      - {pattern: "encuesta para candidato", weight: 4}
+      - {pattern: "encuesta para la gubernatura", weight: 4}
+      - {pattern: "encuesta del partido", weight: 4}
+      - {pattern: "sondeo electoral", weight: 4}
+      - {pattern: "intención de voto", weight: 5}
+      - {pattern: "preferencia electoral", weight: 4}
+      - {pattern: "encuesta de opinión política", weight: 4}
+      - {pattern: "encuesta", weight: 1}
+      - {pattern: "sondeo", weight: 1}
     negative:
-      - {pattern: encuesta de servicio, weight: 3}
+      - {pattern: "encuesta a maestros", weight: 4}
+      - {pattern: "encuesta docente", weight: 4}
+      - {pattern: "encuesta sobre usicamm", weight: 4}
+      - {pattern: "encuesta de servicio", weight: 4}
+      - {pattern: "encuesta del banxico", weight: 4}
+      - {pattern: "encuesta de analistas", weight: 4}
+      - {pattern: "encuesta de satisfacción", weight: 4}
   - name: Registro o anuncio de candidatura
     positive:
-      - {pattern: candidatura, weight: 2}
-      - {pattern: se registra como candidat, weight: 4, regex: true}
-      - {pattern: se registra .* candidat, weight: 5, regex: true}
-      - {pattern: inscribir.* candidat, weight: 5, regex: true}
-      - {pattern: candidato a gobernar, weight: 4}
-      - {pattern: aspirante a la gubernatura, weight: 4}
-      - {pattern: registro para la gubernatura, weight: 4}
-      - {pattern: anuncia su candidatura, weight: 4}
+      - {pattern: "candidatura a la gubernatura", weight: 5}
+      - {pattern: "candidatura para gobernador", weight: 5}
+      - {pattern: "candidatura gubernamental", weight: 5}
+      - {pattern: "candidatura municipal", weight: 4}
+      - {pattern: "candidatura de morena", weight: 4}
+      - {pattern: "candidatura del pan", weight: 4}
+      - {pattern: "candidatura del pri", weight: 4}
+      - {pattern: "se registra como candidat", weight: 4, regex: true}
+      - {pattern: "se registra .* candidat", weight: 5, regex: true}
+      - {pattern: "inscribir.* candidat", weight: 5, regex: true}
+      - {pattern: "candidato a gobernar", weight: 4}
+      - {pattern: "aspirante a la gubernatura", weight: 4}
+      - {pattern: "registro para la gubernatura", weight: 4}
+      - {pattern: "anuncia su candidatura", weight: 4}
+      - {pattern: "candidatura", weight: 1}
+    negative:
+      - {pattern: "pozo krem", weight: 5}
+      - {pattern: "pozo de pemex", weight: 5}
+      - {pattern: "programas de salud de pemex", weight: 5}
   - name: Renuncia o declinación
     positive:
       - {pattern: renunció, weight: 4}

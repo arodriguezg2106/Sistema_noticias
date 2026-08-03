@@ -40,9 +40,12 @@ class ProcessingPipeline:
         self.events = EventRepository(database)
         self.rule_matches = RuleMatchRepository(database)
         self.rules = RuleEngine(configs)
-        self.grouper = EventGrouper(
-            self.events, configs["scoring_rules"].get("grouping", {})
-        )
+        grouping_config = dict(configs["scoring_rules"].get("grouping", {}))
+        if "settings" in configs and isinstance(configs["settings"], dict):
+            periodo = configs["settings"].get("periodo_y_recoleccion", {})
+            if isinstance(periodo, dict) and "ventana_agrupacion_dias" in periodo:
+                grouping_config["temporal_window_days"] = periodo["ventana_agrupacion_dias"]
+        self.grouper = EventGrouper(self.events, grouping_config)
         self.scorer = EventScorer(self.events, configs["scoring_rules"])
         self.summaries = SummaryGenerator(configs)
 
@@ -52,6 +55,40 @@ class ProcessingPipeline:
             self.sources.upsert(Source(**item))
         for item in self.configs["actors"].get("actors", []):
             self.actors.upsert(Actor(**item))
+        self.purge_excluded_publications()
+
+    def purge_excluded_publications(self) -> None:
+        """Purge stored DB publications and orphan events matching configured exclude_keywords."""
+        excluded_terms: set[str] = set()
+        for config_key in ("rss_sources", "news_sitemaps"):
+            cfg = self.configs.get(config_key, {})
+            items = cfg.get("feeds", []) if "feeds" in cfg else cfg.get("sitemaps", [])
+            for item in items:
+                if isinstance(item, dict):
+                    for kw in item.get("exclude_keywords", []):
+                        excluded_terms.add(str(kw).strip())
+        if not excluded_terms:
+            return
+        with self.database.transaction() as connection:
+            for term in excluded_terms:
+                if not term:
+                    continue
+                pattern = f"%{term}%"
+                connection.execute(
+                    "DELETE FROM rule_matches WHERE publication_id IN (SELECT id FROM publications WHERE title LIKE ?)",
+                    (pattern,),
+                )
+                connection.execute(
+                    "DELETE FROM event_publications WHERE publication_id IN (SELECT id FROM publications WHERE title LIKE ?)",
+                    (pattern,),
+                )
+                connection.execute(
+                    "DELETE FROM publications WHERE title LIKE ?",
+                    (pattern,),
+                )
+            connection.execute(
+                "DELETE FROM events WHERE id NOT IN (SELECT event_id FROM event_publications)"
+            )
 
     def run(self, collector: Collector) -> ProcessingSummary:
         summary = ProcessingSummary()

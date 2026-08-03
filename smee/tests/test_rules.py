@@ -91,3 +91,47 @@ def test_fasci_enrollment_variant_is_candidate_event(configs) -> None:
     assert result.state == "Nuevo León"
     assert result.event_type == "Registro o anuncio de candidatura"
     assert result.actor_names == ["Aldo Fasci"]
+
+
+def test_non_electoral_surveys_and_industry_news_are_filtered(configs) -> None:
+    now = datetime.now(timezone.utc)
+    
+    # CNTE magisterial Usicamm survey in Oaxaca
+    pub1 = Publication(
+        id=6, source_id=1,
+        title="Sheinbaum alista reunión con Sección 22 de la CNTE sobre acuerdos en Oaxaca",
+        url="https://example.mx/f", normalized_url="https://example.mx/f",
+        published_at=now, collected_at=now, author=None,
+        raw_text="Explicó que primero se realizará una encuesta docente sobre Usicamm entre los maestros de Oaxaca.",
+        normalized_text="cnte oaxaca usicamm encuesta docente", content_hash="hash-f",
+    )
+    result1 = RuleEngine(configs).classify(pub1)
+    assert result1.event_type is None
+
+    # Pemex Pozo Krem-1 in Veracruz
+    pub2 = Publication(
+        id=7, source_id=1,
+        title="Pemex cierra Pozo Krem-1 y continúa con programas de salud",
+        url="https://example.mx/g", normalized_url="https://example.mx/g",
+        published_at=now, collected_at=now, author=None,
+        raw_text="Pemex, Pozo Krem-1, salud, Veracruz.",
+        normalized_text="pemex veracruz pozo krem-1", content_hash="hash-g",
+    )
+    result2 = RuleEngine(configs).classify(pub2)
+    assert result2.event_type is None
+
+
+def test_legitimate_party_surveys_are_retained(configs) -> None:
+    now = datetime.now(timezone.utc)
+    pub = Publication(
+        id=8, source_id=1,
+        title="Cuatro finalistas de Morena avanzan a la encuesta estatal en CDMX",
+        url="https://example.mx/h", normalized_url="https://example.mx/h",
+        published_at=now, collected_at=now, author=None,
+        raw_text="Morena realizará una encuesta estatal en la Ciudad de México para la candidaturas 2027.",
+        normalized_text="morena encuesta estatal cdmx candidaturas", content_hash="hash-h",
+    )
+    result = RuleEngine(configs).classify(pub)
+    assert result.state == "Ciudad de México"
+    assert result.party == "Morena"
+    assert result.event_type == "Nueva encuesta"

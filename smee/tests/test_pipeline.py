@@ -69,3 +69,28 @@ def test_end_to_end_pipeline_creates_events_audit_and_report(tmp_path, project_r
             "SELECT state_detected FROM publications WHERE external_id='local-without-state'"
         ).fetchone()
     assert row["state_detected"] == "Jalisco"
+
+
+def test_central_settings_override(tmp_path, configs) -> None:
+    """Verify that settings.yaml parameters correctly configure components."""
+    custom_configs = dict(configs)
+    custom_configs["settings"] = {
+        "periodo_y_recoleccion": {
+            "antiguedad_maxima_horas": 72,
+            "limite_articulos_por_rss": 25,
+            "ventana_agrupacion_dias": 5,
+            "ano_electoral_defecto": "2030",
+        },
+        "resumenes": {
+            "palabras_minimas": 40,
+            "palabras_maximas": 70,
+        },
+    }
+    database = Database(tmp_path / "smee_settings.db")
+    pipeline = ProcessingPipeline(database, custom_configs)
+
+    assert pipeline.grouper.settings["temporal_window_days"] == 5
+    assert pipeline.summaries.minimum_words == 40
+    assert pipeline.summaries.maximum_words == 70
+    assert pipeline.summaries.default_electoral_year == "2030"
+

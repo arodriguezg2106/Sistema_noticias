@@ -30,7 +30,7 @@ class ConfigLoader:
         return data
 
     def load_all(self) -> dict[str, dict[str, Any]]:
-        names = (
+        names = [
             "sources.yaml",
             "searches.yaml",
             "states.yaml",
@@ -41,5 +41,8 @@ class ConfigLoader:
             "rss_sources.yaml",
             "news_sitemaps.yaml",
             "summary_rules.yaml",
-        )
+            "settings.yaml",
+        ]
+        if (self.config_dir / "direct_urls.yaml").is_file():
+            names.append("direct_urls.yaml")
         return {Path(name).stem: self.load(name) for name in names}

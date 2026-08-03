@@ -24,9 +24,15 @@ class SummaryGenerator:
     def __init__(self, configs: dict[str, dict[str, Any]]) -> None:
         self.rules = configs["summary_rules"]
         limits = self.rules.get("limits", {})
-        self.minimum_words = int(limits.get("minimum_words", 35))
-        self.maximum_words = int(limits.get("maximum_words", 60))
+        central = configs.get("settings", {})
+        resumenes = central.get("resumenes", {}) if isinstance(central.get("resumenes"), dict) else {}
+        periodo = central.get("periodo_y_recoleccion", {}) if isinstance(central.get("periodo_y_recoleccion"), dict) else {}
+
+        self.minimum_words = int(resumenes.get("palabras_minimas", limits.get("minimum_words", 35)))
+        self.maximum_words = int(resumenes.get("palabras_maximas", limits.get("maximum_words", 60)))
+        self.default_electoral_year = str(periodo.get("ano_electoral_defecto", self.rules.get("default_electoral_year", "2027")))
         self.party_catalog = configs.get("parties", {}).get("parties", [])
+        self.context_templates: dict[str, list[str]] = self.rules.get("context_templates", {})
         self.verb_forms: list[tuple[str, int]] = []
         for item in self.rules.get("verbs", []):
             strength = int(item.get("strength", 1))
@@ -70,7 +76,9 @@ class SummaryGenerator:
         context = self._context_sentence(publication, actors)
         main = self._fit_main(main, context)
         summary = f"{self._as_sentence(main)} {context}".strip()
-        return self._enforce_limits(summary)
+        # Collect backup sentences for filler when the summary is too short.
+        backup = [s for s in body_sentences if s != main and s != body_sentence]
+        return self._enforce_limits(summary, backup)
 
     def _main_body_sentence(
         self,
@@ -112,10 +120,24 @@ class SummaryGenerator:
             publication.event_type_detected,
             "un hecho relacionado con el proceso electoral",
         )
+        # Select a template deterministically from YAML context_templates.
+        event_type = publication.event_type_detected or ""
+        templates = self.context_templates.get(
+            event_type, self.context_templates.get("_default", [])
+        )
+        if templates:
+            index = hash(publication.content_hash) % len(templates)
+            template = str(templates[index])
+            return template.format(
+                event_phrase=event_phrase,
+                state=state_text,
+                parties=party_text,
+                year=year,
+            )
+        # Fallback if no templates configured at all.
         return (
-            f"El asunto electoral principal corresponde a {event_phrase} en {state_text}, "
-            f"con referencia directa a {party_text}, dentro del proceso electoral de {year}; "
-            "estos datos delimitan el alcance territorial, partidista y temporal del hecho reportado."
+            f"El hecho se ubica en el contexto de {event_phrase} en {state_text}, "
+            f"con mención de {party_text}, en el proceso electoral de {year}."
         )
 
     def _parties(self, publication: Publication, actors: list[Actor]) -> list[str]:
@@ -138,7 +160,7 @@ class SummaryGenerator:
         if matches:
             first, second = matches[0]
             return f"{first}-{second}" if second else first
-        return str(self.rules.get("default_electoral_year", "año no identificado"))
+        return str(getattr(self, "default_electoral_year", self.rules.get("default_electoral_year", "año no identificado")))
 
     def _verb(self, text: str) -> DetectedVerb | None:
         normalized = normalize_text(text)
@@ -180,12 +202,19 @@ class SummaryGenerator:
         )
 
     def _neutral_main(self, publication: Publication, actor_names: list[str]) -> str:
-        actor = self._join_spanish(actor_names) if actor_names else "La publicación"
+        actor = self._join_spanish(actor_names) if actor_names else ""
         event_phrase = self.rules.get("event_phrases", {}).get(
             publication.event_type_detected,
             "un hecho electoral",
         )
-        return f"{actor} aparece vinculado con {event_phrase}"
+        state = publication.state_detected
+        if actor and state:
+            return f"{actor} fue referido en el contexto de {event_phrase} en {state}"
+        if actor:
+            return f"{actor} fue mencionado en relación con {event_phrase}"
+        if state:
+            return f"Se reportó {event_phrase} en {state}"
+        return f"Se registró información sobre {event_phrase}"
 
     def _ensure_actor(self, main: str, title: str, actor_names: list[str]) -> str:
         if not actor_names or self._contains_actor(main, actor_names):
@@ -197,24 +226,52 @@ class SummaryGenerator:
     def _fit_main(self, main: str, context: str) -> str:
         available = max(4, self.maximum_words - self._word_count(context))
         words = main.strip(" .").split()
-        if len(words) > available:
-            words = words[:available]
-            while words and words[-1].lower() in {"de", "del", "a", "al", "con", "en", "por", "para", "que", "y"}:
-                words.pop()
-        return " ".join(words)
+        if len(words) <= available:
+            return " ".join(words)
+        # Try to cut at the last clause boundary within the word limit.
+        truncated = " ".join(words[:available])
+        for separator in (";", ",", " que ", " donde ", " cuando "):
+            pos = truncated.rfind(separator)
+            if pos > len(truncated) // 3:
+                truncated = truncated[:pos].strip()
+                break
+        else:
+            # Fallback: remove trailing function words (prepositions, articles,
+            # conjunctions) that leave the sentence dangling.
+            result_words = truncated.split()
+            _trailing_noise = {
+                "de", "del", "a", "al", "con", "en", "por", "para",
+                "que", "y", "la", "el", "lo", "las", "los", "un", "una",
+            }
+            while result_words and result_words[-1].lower() in _trailing_noise:
+                result_words.pop()
+            truncated = " ".join(result_words)
+        return truncated
 
-    def _enforce_limits(self, summary: str) -> str:
+    def _enforce_limits(
+        self, summary: str, backup_sentences: list[str] | None = None,
+    ) -> str:
         words = summary.split()
         if len(words) > self.maximum_words:
             words = words[: self.maximum_words]
             summary = " ".join(words).rstrip(" ,;:") + "."
         if len(words) < self.minimum_words:
-            # This clause describes the evidence boundary and adds no event claim.
-            supplement = " según la información electoral disponible en la publicación"
-            summary = summary.rstrip(".") + supplement + "."
-            words = summary.split()
-            if len(words) > self.maximum_words:
-                summary = " ".join(words[: self.maximum_words]).rstrip(" ,;:") + "."
+            # Try to insert a supporting sentence from the article body.
+            extended = False
+            if backup_sentences:
+                for candidate in backup_sentences:
+                    candidate_text = candidate.strip(" .")
+                    attempt = summary.rstrip(".") + "; " + candidate_text[:1].lower() + candidate_text[1:] + "."
+                    if len(attempt.split()) <= self.maximum_words:
+                        summary = attempt
+                        extended = True
+                        break
+            if not extended:
+                supplement = " según lo publicado por la fuente consultada"
+                summary = summary.rstrip(".") + supplement + "."
+                words = summary.split()
+                if len(words) > self.maximum_words:
+                    summary = " ".join(words[: self.maximum_words]).rstrip(" ,;:") + "."
         return summary
 
     @staticmethod

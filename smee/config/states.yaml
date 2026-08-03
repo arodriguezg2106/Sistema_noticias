@@ -14,7 +14,7 @@ states:
     aliases: [estado de baja california]
     municipalities: [Mexicali, Tijuana, Ensenada]
   - name: Baja California Sur
-    aliases: [estado de baja california sur, bcs]
+    aliases: [baja california sur, baja sur, b.c.s., bcs, estado de baja california sur]
     municipalities: [La Paz, Los Cabos]
   - name: Campeche
     aliases: [estado de campeche]
@@ -101,5 +101,5 @@ states:
     aliases: [yucatan, estado de yucatán]
     municipalities: [Mérida, Valladolid]
   - name: Zacatecas
-    aliases: [estado de zacatecas]
+    aliases: [zacatecas, zac, estado de zacatecas]
     municipalities: [Zacatecas, Fresnillo]

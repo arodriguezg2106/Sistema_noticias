@@ -11,6 +11,30 @@ sources:
     state: null
     reliability_level: medium
     is_active: true
+  - name: El Universal
+    source_type: media
+    base_url: https://www.eluniversal.com.mx
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: El Universal Estados
+    source_type: media
+    base_url: https://www.eluniversal.com.mx/estados
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: El Universal Nación
+    source_type: media
+    base_url: https://www.eluniversal.com.mx/nacion
+    state: null
+    reliability_level: high
+    is_active: true
+  - name: Expansión Política
+    source_type: media
+    base_url: https://politica.expansion.mx
+    state: null
+    reliability_level: high
+    is_active: true
   - name: El Congresista
     source_type: media
     base_url: https://elcongresista.mx

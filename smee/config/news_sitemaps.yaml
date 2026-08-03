@@ -12,7 +12,7 @@ sitemaps:
     sitemap_url: https://elcongresista.mx/sitemap-news.xml
     max_items: 30
     max_age_hours: 48
-    filter_scope: title
+    filter_scope: all
     required_path_prefixes:
       - /politica/
     enabled: true
@@ -39,3 +39,87 @@ sitemaps:
       - impugna reforma electoral
       - sanción electoral
       - tribunal electoral
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Venezuela
+      - Argentina
+      - Colombia
+      - Francia
+      - Rusia
+      - China
+  - source_name: El Universal Estados
+    sitemap_url: https://www.eluniversal.com.mx/arc/outboundfeeds/sitemap/category/estados/?outputType=xml
+    max_items: 40
+    max_age_hours: 168
+    filter_scope: all
+    required_path_prefixes:
+      - /estados/
+      - /nacion/
+      - /politica/
+    enabled: true
+    include_keywords:
+      - gubernatura
+      - elecciones
+      - electoral
+      - candidatura
+      - candidato
+      - candidata
+      - precampaña
+      - encuesta
+      - intención de voto
+      - coalición
+      - alianza
+      - ventaja
+      - consolida
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Venezuela
+      - Argentina
+      - Colombia
+      - Francia
+      - Rusia
+      - China
+  - source_name: El Universal Nación
+    sitemap_url: https://www.eluniversal.com.mx/arc/outboundfeeds/sitemap/category/nacion/?outputType=xml
+    max_items: 40
+    max_age_hours: 168
+    filter_scope: all
+    required_path_prefixes:
+      - /nacion/
+      - /politica/
+      - /estados/
+    enabled: true
+    include_keywords:
+      - gubernatura
+      - elecciones
+      - electoral
+      - candidatura
+      - candidato
+      - candidata
+      - precampaña
+      - encuesta
+      - intención de voto
+      - coalición
+      - alianza
+      - ventaja
+      - consolida
+      - aspirantes
+    exclude_keywords:
+      - Brasil
+      - Lula
+      - Trump
+      - Biden
+      - Venezuela
+      - Argentina
+      - Colombia
+      - Francia
+      - Rusia
+      - China
+
+

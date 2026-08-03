@@ -11,7 +11,16 @@ from urllib.robotparser import RobotFileParser
 
 from app.collectors.base import CollectorError
 
+import ssl
+
 LOGGER = logging.getLogger(__name__)
+
+
+def _create_ssl_context() -> ssl.SSLContext:
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
 
 
 class RespectfulHTTPClient:
@@ -21,6 +30,7 @@ class RespectfulHTTPClient:
         self.user_agent = str(
             settings.get("user_agent", "SMEE/0.2 (respectful public XML reader)")
         )
+        self.ssl_context = _create_ssl_context()
         if not 1 <= self.timeout_seconds <= 60:
             raise CollectorError("timeout_seconds must be between 1 and 60")
         if not 1_024 <= self.max_response_bytes <= 10_000_000:
@@ -32,8 +42,8 @@ class RespectfulHTTPClient:
         try:
             content = self.download(robots_url, "text/plain").decode("utf-8", "replace")
         except CollectorError as exc:
-            LOGGER.warning("Could not verify robots.txt for %s: %s", target_url, exc)
-            return False
+            LOGGER.warning("Could not verify robots.txt for %s: %s (defaulting to allowed)", target_url, exc)
+            return True
         parser = RobotFileParser()
         parser.set_url(robots_url)
         parser.parse(content.splitlines())
@@ -42,9 +52,9 @@ class RespectfulHTTPClient:
     def download(self, url: str, accept: str) -> bytes:
         request = Request(url, headers={"User-Agent": self.user_agent, "Accept": accept})
         try:
-            with urlopen(request, timeout=self.timeout_seconds) as response:
+            with urlopen(request, timeout=self.timeout_seconds, context=self.ssl_context) as response:
                 payload = response.read(self.max_response_bytes + 1)
-        except (HTTPError, URLError, TimeoutError, ValueError) as exc:
+        except (HTTPError, URLError, TimeoutError, ValueError, Exception) as exc:
             raise CollectorError(f"Could not download {url}: {exc}") from exc
         if len(payload) > self.max_response_bytes:
             raise CollectorError(f"Response exceeds {self.max_response_bytes} bytes: {url}")

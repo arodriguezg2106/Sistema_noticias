@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -30,7 +31,9 @@ class RSSFeedConfig:
     publication_type: str = "news"
     max_items: int = 15
     include_keywords: tuple[str, ...] = ()
+    exclude_keywords: tuple[str, ...] = ()
     filter_scope: str = "title"
+    require_mexico_context: bool = False
 
     @classmethod
     def from_mapping(cls, data: dict[str, Any], default_max_items: int) -> "RSSFeedConfig":
@@ -45,6 +48,8 @@ class RSSFeedConfig:
         if not 1 <= max_items <= 100:
             raise CollectorError(f"max_items must be between 1 and 100 for {source_name}")
         filter_scope = str(data.get("filter_scope", "title"))
+        if filter_scope == "all":
+            filter_scope = "title_and_summary"
         if filter_scope not in {"title", "title_and_summary"}:
             raise CollectorError(f"Invalid filter_scope for {source_name}: {filter_scope}")
         return cls(
@@ -53,7 +58,9 @@ class RSSFeedConfig:
             publication_type=str(data.get("publication_type", "news")),
             max_items=max_items,
             include_keywords=tuple(str(item) for item in data.get("include_keywords", [])),
+            exclude_keywords=tuple(str(item) for item in data.get("exclude_keywords", [])),
             filter_scope=filter_scope,
+            require_mexico_context=bool(data.get("require_mexico_context", False)),
         )
 
 
@@ -87,7 +94,11 @@ class RSSCollector(Collector):
         if not 0 <= self.delay_seconds <= 60:
             raise CollectorError("delay_between_feeds_seconds must be between 0 and 60")
         self.http = RespectfulHTTPClient(settings)
-        default_max = int(settings.get("max_items_per_feed", 15))
+        default_max = int(
+            settings.get("periodo_y_recoleccion", {}).get(
+                "limite_articulos_por_rss", settings.get("max_items_per_feed", 15)
+            )
+        )
         feeds = config.get("feeds", [])
         if not isinstance(feeds, list) or not feeds:
             raise CollectorError("rss_sources.yaml must define at least one feed")
@@ -99,6 +110,13 @@ class RSSCollector(Collector):
                 self.feeds.append(RSSFeedConfig.from_mapping(item, default_max))
         if not self.feeds:
             raise CollectorError("No RSS feeds are enabled")
+        # Build the list of Mexican context terms for feeds with require_mexico_context.
+        raw_terms = [str(t) for t in settings.get("mexico_context_terms", [])]
+        if settings.get("mexico_context_include_states", False):
+            for state_entry in settings.get("states", []):
+                if isinstance(state_entry, dict) and state_entry.get("name"):
+                    raw_terms.append(str(state_entry["name"]))
+        self.mexico_context_terms: tuple[str, ...] = tuple(raw_terms)
 
     def collect(self) -> list[CollectedPublication]:
         publications: list[CollectedPublication] = []
@@ -153,9 +171,21 @@ class RSSCollector(Collector):
                 title if feed.filter_scope == "title" else f"{title} {body}"
             )
             if feed.include_keywords and not any(
-                normalize_text(keyword) in searchable for keyword in feed.include_keywords
+                re.search(rf"(?<!\w){re.escape(normalize_text(kw))}", searchable)
+                for kw in feed.include_keywords
             ):
                 continue
+            if feed.exclude_keywords and any(
+                re.search(rf"(?<!\w){re.escape(normalize_text(kw))}", searchable)
+                for kw in feed.exclude_keywords
+            ):
+                continue
+            if feed.require_mexico_context and self.mexico_context_terms:
+                if not any(
+                    re.search(rf"(?<!\w){re.escape(normalize_text(term))}", searchable)
+                    for term in self.mexico_context_terms
+                ):
+                    continue
             date_text = self._child_text(node, "pubdate", "published", "updated", "date")
             results.append(
                 CollectedPublication(

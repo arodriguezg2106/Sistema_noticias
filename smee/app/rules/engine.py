@@ -62,7 +62,7 @@ class RuleEngine:
         if party_ambiguous:
             review_reasons.append("Se detectaron varios partidos con fuerza similar")
         actor_names = self._detect_actors(text, publication.id, matches)
-        event_type, event_ambiguous = self._detect_event_type(text, publication.id, matches)
+        event_type, event_ambiguous = self._detect_event_type(text, publication.id, matches, party, actor_names)
         if event_ambiguous:
             review_reasons.append("Varios tipos de evento obtuvieron puntuaciones equivalentes")
         if event_type is None:
@@ -132,8 +132,47 @@ class RuleEngine:
                     break
         return sorted(set(detected))
 
+    def _has_electoral_anchor(
+        self, text: str, party: str | None, actor_names: list[str]
+    ) -> bool:
+        if party is not None or bool(actor_names):
+            return True
+        electoral_keywords = {
+            "gubernatura",
+            "elección",
+            "elecciones",
+            "precampaña",
+            "candidato",
+            "candidata",
+            "candidatos",
+            "candidatas",
+            "proceso electoral",
+            "tepjf",
+            "ine",
+            "ople",
+            "voto",
+            "votación",
+            "alianza electoral",
+            "coalición",
+            "propaganda",
+            "encuesta estatal",
+            "encuesta electoral",
+            "encuesta interna",
+            "intención de voto",
+            "preferencia electoral",
+        }
+        for kw in electoral_keywords:
+            if _literal_occurrences(text, kw):
+                return True
+        return False
+
     def _detect_event_type(
-        self, text: str, publication_id: int, matches: list[RuleMatch]
+        self,
+        text: str,
+        publication_id: int,
+        matches: list[RuleMatch],
+        party: str | None = None,
+        actor_names: list[str] | None = None,
     ) -> tuple[str | None, bool]:
         scores: dict[str, int] = defaultdict(int)
         for event_type in self.event_types:
@@ -156,6 +195,14 @@ class RuleEngine:
                     ))
         if not scores:
             return None, False
+
+        # Verify electoral anchor to filter out non-electoral false positives
+        has_anchor = self._has_electoral_anchor(text, party, actor_names or [])
+        if not has_anchor:
+            # Require minimum_event_score >= 3 if no explicit electoral anchor is present
+            for name in list(scores.keys()):
+                scores[name] -= 1
+
         ranking = sorted(scores.items(), key=lambda pair: (-pair[1], pair[0]))
         minimum = int(self.settings.get("minimum_event_score", 2))
         if ranking[0][1] < minimum:
