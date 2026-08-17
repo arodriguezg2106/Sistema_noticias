@@ -313,7 +313,7 @@ feeds:
     enabled: true
     require_mexico_context: true
     include_keywords:
-      - eleccion
+      - elección
       - electoral
       - elecciones
       - elecciones 2027
@@ -324,10 +324,10 @@ feeds:
       - encuestas
       - preferencia
       - preferencias electorales
-      - intencion de voto
+      - intención de voto
       - rumbo a las elecciones
-      - alcaldia
-      - alcaldias
+      - alcaldía
+      - alcaldías
       - Morena
       - PAN
       - PRI
@@ -338,7 +338,7 @@ feeds:
       - Suprema Corte
       - ministros
       - alcaldes
-      - aprobacion
+      - aprobación
       - gabinete
 
 
