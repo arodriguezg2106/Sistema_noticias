@@ -47,6 +47,36 @@ sources:
     state: Nuevo León
     reliability_level: high
     is_active: true
+  - name: El Universal San Luis
+    source_type: media
+    base_url: https://sanluis.eluniversal.com.mx
+    state: San Luis Potosí
+    reliability_level: high
+    is_active: true
+  - name: CE Online
+    source_type: media
+    base_url: https://ceonline.com.mx
+    state: San Luis Potosí
+    reliability_level: medium
+    is_active: true
+  - name: El Exprés
+    source_type: media
+    base_url: https://www.elexpres.com
+    state: San Luis Potosí
+    reliability_level: medium
+    is_active: true
+  - name: Código San Luis
+    source_type: media
+    base_url: https://codigosanluis.com
+    state: San Luis Potosí
+    reliability_level: medium
+    is_active: true
+  - name: Gobernarte
+    source_type: pollster
+    base_url: https://gobernarte.com.mx
+    state: null
+    reliability_level: medium
+    is_active: true
   - name: Diario del Norte
     source_type: media
     base_url: https://diariodelnorte.example

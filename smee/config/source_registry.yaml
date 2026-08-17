@@ -8,6 +8,7 @@ settings:
 sources:
   # Nacionales. Son semillas para verificación, no aprobación editorial automática.
   - {name: El Universal, base_url: https://www.eluniversal.com.mx, states: [], priority: high}
+  - {name: Gobernarte, base_url: https://gobernarte.com.mx, states: [], priority: medium}
   - {name: Milenio, base_url: https://www.milenio.com, states: [], priority: high}
   - {name: Excélsior, base_url: https://www.excelsior.com.mx, states: [], priority: high}
   - {name: La Jornada, base_url: https://www.jornada.com.mx, states: [], priority: high}
@@ -45,6 +46,10 @@ sources:
   - {name: AD Querétaro, base_url: https://aldialogo.mx, states: [Querétaro]}
   - {name: Novedades de Quintana Roo, base_url: https://sipse.com, states: [Quintana Roo]}
   - {name: Pulso de San Luis, base_url: https://pulsoslp.com.mx, states: [San Luis Potosí]}
+  - {name: El Universal San Luis, base_url: https://sanluis.eluniversal.com.mx, states: [San Luis Potosí], priority: high}
+  - {name: CE Online, base_url: https://ceonline.com.mx, states: [San Luis Potosí], priority: medium}
+  - {name: El Exprés, base_url: https://www.elexpres.com, states: [San Luis Potosí], priority: medium}
+  - {name: Código San Luis, base_url: https://codigosanluis.com, states: [San Luis Potosí], priority: medium}
   - {name: Noroeste, base_url: https://www.noroeste.com.mx, states: [Sinaloa], priority: high}
   - {name: El Debate, base_url: https://www.debate.com.mx, states: [Sinaloa]}
   - {name: Expreso, base_url: https://www.expreso.com.mx, states: [Sonora]}

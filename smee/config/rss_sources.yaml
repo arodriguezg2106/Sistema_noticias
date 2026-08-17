@@ -253,6 +253,93 @@ feeds:
       - Colombia
       - Rusia
       - Ucrania
+  - source_name: CE Online
+    feed_url: https://ceonline.com.mx/feed/
+    publication_type: news
+    filter_scope: all
+    max_items: 50
+    enabled: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - elecciones 2027
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - aspirante
+      - aspirantes
+      - coalición
+      - alianza
+      - sin alianza
+      - irá solo
+      - PVEM
+      - Morena
+      - encuesta
+      - preferencias electorales
+      - intención de voto
+  - source_name: Código San Luis
+    feed_url: https://codigosanluis.com/feed/
+    publication_type: news
+    filter_scope: all
+    max_items: 50
+    enabled: true
+    include_keywords:
+      - elección
+      - electoral
+      - elecciones
+      - elecciones 2027
+      - gubernatura
+      - candidatura
+      - candidato
+      - candidata
+      - aspirante
+      - aspirantes
+      - coalición
+      - alianza
+      - PVEM
+      - Morena
+      - encuesta
+      - preferencias electorales
+      - intención de voto
+      - violencia política
+      - proceso electoral
+  - source_name: Gobernarte
+    feed_url: https://gobernarte.com.mx/feed/
+    publication_type: poll
+    filter_scope: all
+    max_items: 50
+    enabled: true
+    require_mexico_context: true
+    include_keywords:
+      - eleccion
+      - electoral
+      - elecciones
+      - elecciones 2027
+      - gubernatura
+      - gobernador
+      - gobernadora
+      - encuesta
+      - encuestas
+      - preferencia
+      - preferencias electorales
+      - intencion de voto
+      - rumbo a las elecciones
+      - alcaldia
+      - alcaldias
+      - Morena
+      - PAN
+      - PRI
+      - Movimiento Ciudadano
+      - Partido Verde
+      - PT
+    exclude_keywords:
+      - Suprema Corte
+      - ministros
+      - alcaldes
+      - aprobacion
+      - gabinete
 
 
 
